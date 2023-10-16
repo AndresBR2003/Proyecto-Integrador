@@ -1,0 +1,5 @@
+package cibertec.edu.pe.controller;
+
+public class RegistroUsuarioController {
+
+}

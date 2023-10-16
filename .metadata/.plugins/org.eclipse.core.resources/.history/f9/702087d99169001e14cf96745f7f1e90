@@ -1,0 +1,15 @@
+package cibertec.edu.pe.servicio;
+
+import java.util.List;
+import java.util.Optional;
+
+import cibertec.edu.pe.modelo.Programa;
+
+public interface ProgramaServicio {
+	public List<Programa> Listar();
+	public Optional<Programa> Buscar(String idPro);
+	public int Grabar(Programa ObjC);
+	public void Suprimir(String idPro);
+
+
+}

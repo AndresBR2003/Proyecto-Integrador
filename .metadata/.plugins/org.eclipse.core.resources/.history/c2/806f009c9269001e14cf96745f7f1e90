@@ -1,0 +1,8 @@
+package cibertec.edu.pe.serviceImpl;
+
+import org.springframework.stereotype.Service;
+
+@Service
+public class ProgramaServicioImpl {
+
+}

@@ -1,0 +1,5 @@
+package cibertec.edu.pe.repository;
+
+public interface UsuarioRepository {
+
+}

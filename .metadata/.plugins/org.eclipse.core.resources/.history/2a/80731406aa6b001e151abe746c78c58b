@@ -1,0 +1,13 @@
+package cibertec.edu.pe.controlador;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+import cibertec.edu.pe.servicio.FormularioServicio;
+
+public class FormularioControlador {
+	@Autowired
+	private FormularioServicio formServ;
+	
+	
+
+}

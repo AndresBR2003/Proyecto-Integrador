@@ -1,0 +1,5 @@
+package cibertec.edu.pe.repositorio;
+
+public interface RolRepositorio {
+
+}

@@ -1,0 +1,41 @@
+package cibertec.edu.pe.serviceImpl;
+
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import cibertec.edu.pe.modelo.Programa;
+import cibertec.edu.pe.repositorio.ProgramaRepositorio;
+import cibertec.edu.pe.servicio.ProgramaServicio;
+
+@Service
+public class ProgramaServicioImpl implements ProgramaServicio{
+	
+	@Autowired
+	private ProgramaRepositorio programaRepo;
+
+	@Override
+	public List<Programa> Listar() {
+		return (List<Programa>)programaRepo.findAll();
+	}
+
+	@Override
+	public Optional<Programa> Buscar(String nombrePro) {
+		return programaRepo.findById(idPro);
+	}
+
+	@Override
+	public int Grabar(Programa ObjC) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public void Suprimir(String idPro) {
+		// TODO Auto-generated method stub
+		
+	}
+
+}

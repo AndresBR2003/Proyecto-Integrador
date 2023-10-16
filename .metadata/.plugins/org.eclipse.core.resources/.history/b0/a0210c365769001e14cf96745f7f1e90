@@ -1,0 +1,10 @@
+package cibertec.edu.pe.modelo;
+
+public class Programa {
+	private Long idPro;
+	private String nombrePro;
+	private String descripcionPro;
+	private String imagenPro;
+
+
+}

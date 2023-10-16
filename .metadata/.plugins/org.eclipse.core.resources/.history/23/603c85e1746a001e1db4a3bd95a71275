@@ -1,0 +1,14 @@
+package cibertec.edu.pe.servicio;
+
+import java.util.List;
+
+
+import cibertec.edu.pe.modelo.Programa;
+
+public interface ProgramaServicio {
+	public List<Programa> Listar(/*String palabraClave*/);
+	public void Grabar(Programa programa);
+	public Programa get(Long id);
+	public void Suprimir(Long idPro);
+
+}
