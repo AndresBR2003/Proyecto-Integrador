@@ -1,0 +1,29 @@
+package cibertec.edu.pe.controlador;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
+
+import cibertec.edu.pe.modelo.Formulario;
+import cibertec.edu.pe.modelo.Programa;
+import cibertec.edu.pe.servicio.FormularioServicio;
+
+public class FormularioControlador {
+	@Autowired
+	private FormularioServicio formServ;
+	
+	@RequestMapping("/nuevoForm")
+	public String mostrarFormularioDeFormulario(Model m) {
+		//Formulario form = new Formulario();
+		//m.addAttribute("formulario", form);
+		return "redirect:/nuevo";
+	}
+	
+	
+	
+	
+
+}
