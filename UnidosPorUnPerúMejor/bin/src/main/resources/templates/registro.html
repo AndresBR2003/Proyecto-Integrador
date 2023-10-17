@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Registro de donación</title>
+  <link rel="stylesheet"  href="/css/staly.css">
+  <script src="https://kit.fontawesome.com/26df1a260c.js" crossorigin="anonymous"></script>
+</head>
+<body >
+  <header >
+    <div class="logo-container">
+      <img src="/img/logo.png" alt="Imagen" style="width: 10%; height: 10%;">
+      <h1 style="text-align: left; font-family: Roboto, sans-serif; font-size: 24px; line-height: 1.5; padding-left: 3%;">Unidos por un Perú Mejor!</h1>
+    </div>
+    
+    <nav class="nav-container">
+      <ul class="list">
+        <li><a href="/">INICIO</a></li>
+        <li><a href="/programas">PROGRAMAS</a></li>
+        <li><a href="/quienes-somos">QUIÉNES SOMOS</a></li>
+        <li><a href="/donaciones">DONACIONES</a></li>
+      </ul>
+      <div class="menu_ingresar">
+        <img src="/img/arrow_10288803.png" alt="Imagen" style="width: 30px; height: 30px;" >
+        <a class= "login" href="">Ingresa/Regístrate</a>
+      </div>
+      
+      
+    </nav>
+  </header>
+  <main style="margin: 100px;">
+    <form th:action="@{/registro}" method="post" th:object="${usuario}">
+      <h2 >Registro</h2>
+      <div class="formulario">
+        <label for="nombre">Nombres : </label>
+        <input id="nombre" type="text" placeholder="Ingrese sus Nombres" 
+        	onfocus="clearPlaceholder(this)" th:field="*{nombre}" 
+        	required autofocus="autofocus">
+      </div>
+      <div class="formulario">
+        <label for="apellidos">Apellidos : </label>
+        <input type="text" id="apellido" placeholder="Ingrese sus Apellidos"
+        	onfocus="clearPlaceholder(this)" th:field="*{apellido}"
+			required autofocus="autofocus">
+      </div>
+      <div class="formulario">
+        <label for="dni">DNI/C.E.: </label>
+        <input type="text" id="DNI_CE" placeholder="Ingrese su DNI/C.E."
+        	 onfocus="clearPlaceholder(this)" th:field="*{DNI_CE}"
+			 required autofocus="autofocus">
+      </div>
+      <div class="formulario">
+        <label for="celular">Celular : </label>
+        <input type="tel" id="Celular" placeholder="Ingrese su número de celular"
+        	 onfocus="clearPlaceholder(this)" th:field="*{Celular}"
+			 required autofocus="autofocus">
+      </div>
+      <div class="formulario">
+        <label for="correo">Correo Electrónico : </label>
+        <input id="email" type="email" placeholder="Ingrese su correo electrónico" 
+        	onfocus="clearPlaceholder(this)" th:field="*{email}"
+			required autofocus="autofocus">
+      </div>
+      <div class="formulario">
+        <label for="contraseña">Password : </label>
+        <input type="password" id="password" placeholder="Ingrese su contraseña" 
+        	onfocus="clearPlaceholder(this)" th:field="*{password}"
+			required autofocus="autofocus">
+      </div>
+		<button type="submit" class="btn btn-success" >Registrar</button>
+		<span>Si estas registrado <a th:href="@{/login}">inicia sesión aqui</a></span>
+    </form> 
+  </main>
+
+  <script>
+    function clearPlaceholder(input){
+        input.placeholder = "";
+    }
+  </script>
+  <footer class = "footer container" style="border: 1px solid #000; ">
+   
+    <div class="footer-link"> 
+      <div class ="links">
+        <ul style="text-align: left;" >
+          <li>Unidos por un Perú mejor es un asociación legalmente constituida e insrita como UPM(N° Registro 4563) 
+            en la Agencia Peruana de Cooperación Nacional para el Desarrollo e inscrita en el Registro de
+            Asociaciones en Perú como Asociación independiente con Número de Identificación Fiscal G4285273.
+          </li>
+          <li>
+            <img src="/img/location_535239.png" alt="Imagen" style="width: 30px; height: 30px;">
+            <p> Av. Las Nazarenas 123, Santiago de Surco, Lima, Perú</p>
+
+          </li>
+          <li>
+            <img src="/img/phone_1151429.png" alt="Imagen" style="width: 30px; height: 30px;">
+            <p> 01 2453689</p>
+
+          </li>
+
+          <li>
+            <img src="/img/whatsapp_2111774.png" alt="Imagen" style="width: 30px; height: 30px;">
+            <p>+51 954623887</p>
+
+          </li>
+
+        </ul>
+      </div>
+      <div class ="links">
+        <ul style="text-align: left;" >
+          <li>
+            <img src="/img/facebook_665209.png" alt="Imagen" style="width: 30px; height: 30px;">
+            <a href="#"> Unidos por un Perú Mejor</a>
+          </li>
+          <li>
+            <img src="/img/email_2989993.png" alt="Imagen" style="width: 30px; height: 30px;">
+            <a href="#"> unidosporunperumejor@gmail.com</a>
+          </li>
+          <li>
+            <img src="/img/twitter_665228.png" alt="Imagen" style="width: 30px; height: 30px;">
+            <a href="#">Unidos por un Perú Mejor</a>
+          </li> 
+          <li>
+            <img src="/img/instagram_1077042.png" alt="Imagen" style="width: 30px; height: 30px;">
+            <a href="#">@UnidosporunPerúMejor</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <p  class="copyright" style="text-align: center; font-family: Roboto, sans-serif; font-size: 12px;">© 2023 Unidos por un Perú Mejor</p>
+    
+  </footer>
+</body>
+</html>
