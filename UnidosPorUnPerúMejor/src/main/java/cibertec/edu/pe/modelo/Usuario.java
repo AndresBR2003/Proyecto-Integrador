@@ -1,6 +1,8 @@
 package cibertec.edu.pe.modelo;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -16,6 +18,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
+
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
 @Entity
 @Table(name = "usuarios", uniqueConstraints = @UniqueConstraint(columnNames = "email"))
@@ -120,6 +125,20 @@ public class Usuario {
 
 	public void setRoles(Collection<Rol> roles) {
 		this.roles = roles;
+	}
+	
+
+	public Collection<? extends GrantedAuthority> getAuthorities() {
+		List<GrantedAuthority> authorities = new ArrayList<>();
+		  for (Rol rol : roles) {
+		    authorities.add(new SimpleGrantedAuthority(rol.getNombre()));
+		  }
+		  return authorities;
+	}
+	
+
+	public String getUsername() {
+	  return this.email;
 	}
 
 	public Usuario(Long id, String nombre, String apellido, String dni_ce,String celular , String email, String password, Collection<Rol> roles) {
