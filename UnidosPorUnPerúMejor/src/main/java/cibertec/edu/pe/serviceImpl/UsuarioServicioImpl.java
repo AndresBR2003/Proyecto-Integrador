@@ -14,6 +14,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 import cibertec.edu.pe.modelo.Rol;
 import cibertec.edu.pe.modelo.Usuario;
@@ -26,6 +27,8 @@ public class UsuarioServicioImpl implements UsuarioServicio {
 	
 	@Autowired
 	private RolRepositorio rolRepositorio;
+
+
 
 	private UsuarioRepositorio usuarioRepositorio;
 
@@ -75,5 +78,18 @@ public class UsuarioServicioImpl implements UsuarioServicio {
 	public List<Usuario> listarUsuarios() {
 		return usuarioRepositorio.findAll();
 	}
+
+	@Override
+	public Usuario findByEmail(String email) {
+		return usuarioRepositorio.findByEmail(email);
+	}
+
+	@Override
+	public Usuario get(Long id) {
+		return usuarioRepositorio.findById(id).get();
+	}
+
+
+
 
 }

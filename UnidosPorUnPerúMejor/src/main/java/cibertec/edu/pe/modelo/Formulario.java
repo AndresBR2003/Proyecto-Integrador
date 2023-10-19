@@ -24,11 +24,6 @@ public class Formulario {
 	private String copiaDNI_CEForm;
 	
 	@OneToOne(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
-	/*@JoinTable(
-			name = "postulacion",
-			joinColumns = @JoinColumn(name = "form_id",referencedColumnName = "idForm"),
-			inverseJoinColumns = @JoinColumn(name = "usuario_id",referencedColumnName = "id")
-			)*/
 	@JoinColumn(name = "id")
 	private Usuario usuario;
 

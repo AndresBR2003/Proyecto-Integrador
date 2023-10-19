@@ -179,9 +179,11 @@ public class Usuario {
 		this.roles = roles;
 		this.estado = estado;
 	}
-
+	
 	public Usuario() {
 		
 	}
+
+
 
 }
