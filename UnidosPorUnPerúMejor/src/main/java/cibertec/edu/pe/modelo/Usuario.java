@@ -61,6 +61,9 @@ public class Usuario {
 	@OneToOne(mappedBy = "usuario", cascade = CascadeType.ALL)
 	private Formulario formulario;
 	
+	@OneToOne(mappedBy = "usuario", cascade = CascadeType.ALL)
+    private Donaciones donaciones;
+	
 	
 	
 	

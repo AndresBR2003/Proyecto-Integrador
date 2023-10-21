@@ -4,7 +4,7 @@
 <head>
 	
 <meta charset="utf-8">
-<title>Edicion de Programas</title>
+<title>Inicio</title>
 <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
@@ -18,8 +18,6 @@
 	crossorigin="anonymous">
 </head>
 <body>
-
-
 	<nav class="navbar navbar-inverse navbar-fixed-top">
 		<div class="container">
 			<div class="navbar-header">
@@ -44,43 +42,43 @@
 
 	<br>
 	<br>
-
-	<div class="container">
-		<h1>Registro e inicio de sesión con Spring Boot + Spring Security
-			+ Thymeleaf + Hibernate + MySQL y Bootstrap</h1>
-		<br>
-		<h4>
-			Bienvenido <span sec:authentication="principal.username"></span>
-		</h4>
-
-		<br> <br>
-
-		<div class="container">
+	
+    <div class="container">
 		<div class="row">
 			<div class="col-lg-6 col-md-6 col-sm-6 container justify-content-center card">
-				<h1 class="text-center">Registro de Producto</h1>
+				<h1 class="text-center">Donaciones</h1>
 				<div class="carf-body">
-					<form th:action="@{/guardar}" th:object="${programa}" method="post">
+					<form  th:action="@{/guardarDonacion}" th:object="${donacion}" method="post">
 						
 						<div class="form-group">
-							<label>Producto ID : </label>
-							<input type="text" name="nombre" th:field="*{idPro}" class="form-control" readonly="readonly">
+							<label>ID Programa: </label>
+							<input type="text" name="nombre" th:field="*{programa.idPro}" class="form-control" readonly="readonly">
+							
+						</di>
+                        
+                        <div class="form-group">
+							<label>Nro. Targeta : </label>
+							<input type="text" name="nombre" th:field="*{nroTargeta}" class="form-control" placeholder="Digite el nombre del programa" required>
+						</di>
+                        <div class="form-group">
+							<label>Nombre del titular : </label>
+							<input type="text" name="nombre" th:field="*{nombreDelTitular}" class="form-control" placeholder="Digite el nombre del programa" required>
 						</div>
-						
-						<div class="form-group">
-							<label>Nombre : </label>
-							<input type="text" name="nombre" th:field="*{nombrePro}" class="form-control" placeholder="Digite el nombre del programa" required>
+                        <div class="form-group">
+							<label>CVC : </label>
+							<input type="text" name="nombre" th:field="*{CVC}" class="form-control" placeholder="Digite el nombre del programa" required>
 						</div>
+                        <div class="form-group">
+							<label>Caducidad : </label>
+							<input type="text" name="nombre" th:field="*{caducidad}" class="form-control" placeholder="Digite el nombre del programa" required>
+						</div>
+                        <div class="form-group">
+							<label>Total de la donacion : </label>
+							<input type="text" name="nombre" th:field="*{totalDona}" class="form-control" placeholder="Digite el nombre del programa" required>
+						</div>
+                        
 						<div>
-						<a class="btn btn-primary mb-2" th:href="@{'/nuevoForm/' + ${idPro}}">Postularme</a>
-						</div>
-						<br>
-						<div>
-						<a class="btn btn-primary mb-2" th:href="@{'/nuevaDonacion/' + ${idPro}}">Donar</a>
-						</div>
-						<br>
-						<div>
-							<button class="btn btn-success">Guardar Nuevo Programa</button>
+							<button class="btn btn-success">Donar</button>
 						</div>
 						
 					</form>
@@ -88,28 +86,11 @@
 			</div>
 		</div>
 		</div>
-	</div>
-
-
-
-	<!-- Latest compiled and minified JavaScript -->
+	
 	<script
 		src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
 		integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
 		crossorigin="anonymous"></script>
+	
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-

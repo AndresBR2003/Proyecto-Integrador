@@ -8,6 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 
@@ -25,6 +26,9 @@ public class Programa {
 
 	@OneToMany(mappedBy = "programa", cascade = CascadeType.ALL)
 	private Set<Formulario> formularios;
+	
+	@OneToOne(mappedBy = "programa")
+    private Donaciones donaciones;
 	
 	
 
