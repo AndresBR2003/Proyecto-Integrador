@@ -57,7 +57,9 @@ public class ProgramaControlador {
 	
 	@RequestMapping("/eliminar/{idPro}")
 	public String eliminarPrograma(@PathVariable(name = "idPro") Long idPro) {
-		programaServicio.delete(idPro);
+		Programa programa = programaServicio.get(idPro);
+		programa.setEstado(false);
+		programaServicio.save(programa);
 		return "redirect:/programas";
 	}
 	

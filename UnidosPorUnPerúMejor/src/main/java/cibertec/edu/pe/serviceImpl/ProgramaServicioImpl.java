@@ -21,7 +21,7 @@ public class ProgramaServicioImpl implements ProgramaServicio{
 		if(palabraClave != null) {
 			return programaRepo.findAll(palabraClave);
 		}
-		return programaRepo.findAll();
+		return programaRepo.findByEstado();
 	}
 
 	@Override

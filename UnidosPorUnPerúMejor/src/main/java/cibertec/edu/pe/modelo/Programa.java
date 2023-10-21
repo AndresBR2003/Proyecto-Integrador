@@ -20,9 +20,21 @@ public class Programa {
 	private String nombrePro;
 	private String descripcionPro;
 	private String imagenPro;
+	
+	private boolean estado;
 
 	@OneToMany(mappedBy = "programa", cascade = CascadeType.ALL)
 	private Set<Formulario> formularios;
+	
+	
+
+	public boolean isEstado() {
+		return estado;
+	}
+
+	public void setEstado(boolean estado) {
+		this.estado = estado;
+	}
 
 	public Long getIdPro() {
 		return idPro;
@@ -64,7 +76,7 @@ public class Programa {
 		this.formularios = formularios;
 	}
 
-	public Programa(Long idPro, String nombrePro, String descripcionPro, String imagenPro,
+	public Programa(Long idPro, String nombrePro, String descripcionPro, String imagenPro, boolean estado,
 			Set<Formulario> formularios) {
 		super();
 		this.idPro = idPro;
@@ -72,12 +84,14 @@ public class Programa {
 		this.descripcionPro = descripcionPro;
 		this.imagenPro = imagenPro;
 		this.formularios = formularios;
+		this.estado = estado;
 	}
 
 
 
 	public Programa() {
 		super();
+		this.estado = true;
 	}
 
 }

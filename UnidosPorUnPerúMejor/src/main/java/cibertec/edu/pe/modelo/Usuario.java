@@ -62,6 +62,23 @@ public class Usuario {
 	private Formulario formulario;
 	
 	
+	
+	
+	public EstadoUsuario getEstado() {
+		return estado;
+	}
+
+	public void setEstado(EstadoUsuario estado) {
+		this.estado = estado;
+	}
+
+	public Formulario getFormulario() {
+		return formulario;
+	}
+
+	public void setFormulario(Formulario formulario) {
+		this.formulario = formulario;
+	}
 
 	public String getDNI_CE() {
 		return DNI_CE;

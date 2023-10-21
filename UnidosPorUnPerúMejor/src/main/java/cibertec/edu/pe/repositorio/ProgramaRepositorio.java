@@ -10,6 +10,9 @@ import cibertec.edu.pe.modelo.Programa;
 
 public interface ProgramaRepositorio extends JpaRepository<Programa, Long>{
 
-	@Query("SELECT p FROM Programa p WHERE p.nombrePro LIKE %?1%")
+	@Query("SELECT p FROM Programa p WHERE p.nombrePro LIKE %?1% AND p.estado = true")
 	public List<Programa> findAll(String palabraClave);
+	
+	@Query("SELECT p FROM Programa p WHERE p.estado = true")
+	public List<Programa> findByEstado();
 }
