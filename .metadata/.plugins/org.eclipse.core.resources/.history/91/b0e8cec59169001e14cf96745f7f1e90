@@ -1,5 +1,0 @@
-package cibertec.edu.pe.servicio;
-
-public interface ProgramaServicio {
-
-}
