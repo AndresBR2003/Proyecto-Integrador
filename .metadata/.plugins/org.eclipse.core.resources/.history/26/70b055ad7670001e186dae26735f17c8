@@ -7,7 +7,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -27,9 +26,9 @@ public class Donaciones {
 	    @JoinColumn(name = "id")
 	    private Usuario usuario;
 
-	 @ManyToOne // Donación pertenece a un Programa
+	 @OneToOne(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
 	    @JoinColumn(name = "idPro")
-	    private Programa programa; // Relación a la entidad Programa
+	    private Programa programa;
 	
 	public Donaciones() {
 		super();

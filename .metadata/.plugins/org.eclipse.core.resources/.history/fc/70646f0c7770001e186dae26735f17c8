@@ -80,26 +80,18 @@ public class Programa {
 		this.formularios = formularios;
 	}
 
-
 	public Programa(Long idPro, String nombrePro, String descripcionPro, String imagenPro, boolean estado,
-			Set<Formulario> formularios, Set<Donaciones> donaciones) {
+			Set<Formulario> formularios) {
 		super();
 		this.idPro = idPro;
 		this.nombrePro = nombrePro;
 		this.descripcionPro = descripcionPro;
 		this.imagenPro = imagenPro;
-		this.estado = estado;
 		this.formularios = formularios;
-		this.donaciones = donaciones;
+		this.estado = estado;
 	}
 
-	public Set<Donaciones> getDonaciones() {
-		return donaciones;
-	}
 
-	public void setDonaciones(Set<Donaciones> donaciones) {
-		this.donaciones = donaciones;
-	}
 
 	public Programa() {
 		super();
