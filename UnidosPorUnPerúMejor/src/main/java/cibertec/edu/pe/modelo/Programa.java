@@ -20,6 +20,8 @@ public class Programa {
 	private Long idPro;
 	private String nombrePro;
 	private String descripcionPro;
+	private String actividades;
+	private String descripcionPro3;
 	private String imagenPro;
 	
 	private boolean estado;
@@ -63,6 +65,22 @@ public class Programa {
 	public void setDescripcionPro(String descripcionPro) {
 		this.descripcionPro = descripcionPro;
 	}
+	
+	public String getActividades() {
+		return actividades;
+	}
+
+	public void setActividades(String actividades) {
+		this.actividades = actividades;
+	}
+
+	public String getDescripcionPro3() {
+		return descripcionPro3;
+	}
+
+	public void setDescripcionPro3(String descripcionPro3) {
+		this.descripcionPro3 = descripcionPro3;
+	}
 
 	public String getImagenPro() {
 		return imagenPro;
@@ -81,12 +99,14 @@ public class Programa {
 	}
 
 
-	public Programa(Long idPro, String nombrePro, String descripcionPro, String imagenPro, boolean estado,
-			Set<Formulario> formularios, Set<Donaciones> donaciones) {
+	public Programa(Long idPro, String nombrePro, String descripcionPro,String actividades, String descripcionPro3,
+			String imagenPro, boolean estado,Set<Formulario> formularios, Set<Donaciones> donaciones) {
 		super();
 		this.idPro = idPro;
 		this.nombrePro = nombrePro;
 		this.descripcionPro = descripcionPro;
+		this.actividades = actividades;
+		this.descripcionPro3 = descripcionPro3;
 		this.imagenPro = imagenPro;
 		this.estado = estado;
 		this.formularios = formularios;

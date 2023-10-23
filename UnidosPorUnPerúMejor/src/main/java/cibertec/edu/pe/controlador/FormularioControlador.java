@@ -47,7 +47,7 @@ public class FormularioControlador {
 	
 	@RequestMapping("/nuevoForm/{idPro}")
 	public ModelAndView  mostrarFormularioDeFormulario(@PathVariable(name = "idPro") Long idPro) {
-		ModelAndView m = new ModelAndView("nuevo_form");
+		ModelAndView m = new ModelAndView("masInformacion");
 		// Obtener el programa y usuario
 		Programa programa = programaServicio.get(idPro);
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();

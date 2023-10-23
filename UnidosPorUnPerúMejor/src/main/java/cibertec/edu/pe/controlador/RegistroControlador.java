@@ -21,6 +21,16 @@ public class RegistroControlador {
 	@GetMapping("/")
 	public String verPaginaDeInicio(Model modelo) {
 		modelo.addAttribute("usuarios", servicio.listarUsuarios());
-		return "redirect:/programas";
+		return "redirect:/inicio";
+	}
+	
+	@GetMapping("/inicio")
+	public String inicio() {
+		return "inicio";
+	}
+	
+	@GetMapping("/quienesSomos")
+	public String quienesSomos() {
+		return "quienesSomos";
 	}
 }

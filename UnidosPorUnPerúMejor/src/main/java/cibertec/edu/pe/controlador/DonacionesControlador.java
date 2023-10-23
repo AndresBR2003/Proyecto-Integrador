@@ -40,7 +40,7 @@ public class DonacionesControlador {
 	
 	@RequestMapping("/nuevaDonacion/{idPro}")
 	public ModelAndView mostrarFormularioDeRegistrarDonacion(@PathVariable(name = "idPro") Long idPro) {
-		ModelAndView modelo = new ModelAndView("donacion");
+		ModelAndView modelo = new ModelAndView("donaciones");
 		Programa programa = proServi.get(idPro);	
 		Donaciones dona = new Donaciones();
 		dona.setPrograma(programa);

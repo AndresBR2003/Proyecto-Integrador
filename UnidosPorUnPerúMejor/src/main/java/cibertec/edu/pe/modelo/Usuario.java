@@ -42,6 +42,8 @@ public class Usuario {
 	private String email;
 	private String password;
 	
+	private int rol;
+	
 	@ManyToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
 	@JoinTable(
 			name = "usuarios_roles",
@@ -67,6 +69,25 @@ public class Usuario {
 	
 	
 	
+	
+	
+	
+	public int getRol() {
+		return rol;
+	}
+
+	public void setRol(int rol) {
+		this.rol = rol;
+	}
+
+	public Donaciones getDonaciones() {
+		return donaciones;
+	}
+
+	public void setDonaciones(Donaciones donaciones) {
+		this.donaciones = donaciones;
+	}
+
 	public EstadoUsuario getEstado() {
 		return estado;
 	}
@@ -203,6 +224,26 @@ public class Usuario {
 	public Usuario() {
 		
 	}
+
+	public Usuario(Long id, String nombre, String apellido, String dNI_CE, String celular, String email,
+			String password, int rol, Collection<Rol> roles, EstadoUsuario estado, Formulario formulario,
+			Donaciones donaciones) {
+		super();
+		this.id = id;
+		this.nombre = nombre;
+		this.apellido = apellido;
+		DNI_CE = dNI_CE;
+		Celular = celular;
+		this.email = email;
+		this.password = password;
+		this.rol = rol;
+		this.roles = roles;
+		this.estado = estado;
+		this.formulario = formulario;
+		this.donaciones = donaciones;
+	}
+	
+	
 
 
 

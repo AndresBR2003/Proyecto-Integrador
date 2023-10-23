@@ -1,67 +1,38 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<html lang="es">
 <head>
   <meta charset="UTF-8">
   <title>Registro de donación</title>
-  <link rel="stylesheet" type="text/css" href="/css/login.css">
-  <script src="https://kit.fontawesome.com/26df1a260c.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="/css/inicio.css">
 </head>
-<body >
-  <header >
+<body>
+
+    <header >
         <div class="logo-container">
           <img src="/img/logo.png" alt="Imagen" style="width: 10%; height: 10%;">
           <h1 style="text-align: left; font-family: Roboto, sans-serif; font-size: 24px; line-height: 1.5; padding-left: 3%;">Unidos por un Perú Mejor!</h1>
-        </div>  
-    
-    <nav class="nav-container">
-      <ul class="list">
-        <li><a href="/">INICIO</a></li>
-        <li><a href="/programas">PROGRAMAS</a></li>
-        <li><a th:href="@{/quienesSomos}">QUIÉNES SOMOS</a></li>
-      </ul>
-      <div class="menu_ingresar">
-        <img src="/img/arrow_10288803.png" alt="Imagen" style="width: 30px; height: 30px;" >
-        <a class= "login" th:href="@{/registro}">Ingresa/Regístrate</a>
+        </div>        
+        <nav class="nav-container">
+          <ul class="list">
+            <li><a th:href="@{/inicio}">INICIO</a></li>
+            <li><a th:href="@{/programas}">PROGRAMAS</a></li>
+            <li><a th:href="@{/quienesSomos}">QUIÉNES SOMOS</a></li>
+          </ul>
+          <div class="menu_ingresar">
+            <img src="/img/arrow_10288803.png" alt="Imagen" style="width: 30px; height: 30px;" >
+            <a th:href="@{/logout}">Cerrar sesión</a>
+          </div>  
+        </nav>
+    </header>
+    <main>     
+      <div class="pic-ctn">
+        <img src="/img/imagen-1.jpg" alt="" class="pic" height="400px">
+        <img src="/img/imagen-2.jpg" alt="" class="pic" height="400px">
+        <img src="/img/imagen-3.jpg" alt="" class="pic" height="400px">
+        <img src="/img/imagen-4.jpg" alt="" class="pic" height="400px">
+        <img src="/img/imagen-5.jpg" alt="" class="pic" height="400px">
       </div>
-      
-    </nav>
-  </header>
-  
-  <main>
-    <div class="contenedor">
-        <div class="imagen-superior">
-          <img src="/img/arrow_10288803.png" alt="Imagen de encabezado">
-        </div>
-           <div class="formulario">
-      <form class="login-form" th:action="@{/login}" method="post">
-        <div class="campo">
-          <label for="id">Usuario:</label>
-          <input id="username"  name="username" type="text"  
-          		 required autofocus="autofocus" placeholder="Digite su email ID">
-        </div>
-        </br>
-        <div class="campo">
-          <label for="contrasenia">Password:</label>
-          <input id="password" type="password"  name="password" 
-          		 required autofocus="autofocus" placeholder="Digite su password">
-        </div>
-        
-        <div class="form-group">
-				<div class="row">
-					<div class="col-md-6 col-md-offset-3">
-						<input type="submit" class="form-control btn btn-primary" 
-							name="login-submit" id="login-submit" value="Iniciar sesión" />
-				</div>
-			</div>
-		</div>
-      </form>
-      		<div class="nuevo-user">
-				<span>Si eres nuevo usuario <a th:href="@{/registro}">regístrate aqui</a></span>
-			</div>
-    </div>
-  </main>
-
+    </main>
 	  <footer class = "footer container" style="border: 1px solid #000; ">
 	    <div class="footer-link"> 
 	      <div class ="links">
@@ -110,7 +81,6 @@
 	    </div>
 	    <p  class="copyright" style="text-align: center; font-family: Roboto, sans-serif; font-size: 12px;">© 2023 Unidos por un Perú Mejor</p>
 	  </footer>
-
+  
 </body>
-
 </html>

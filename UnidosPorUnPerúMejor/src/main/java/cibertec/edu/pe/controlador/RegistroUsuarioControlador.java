@@ -32,7 +32,9 @@ public class RegistroUsuarioControlador {
 	
 	@PostMapping
 	public String registrarCuentaDeUsuario(@ModelAttribute("usuario") Usuario registro) {
+		registro.setRol(2);
 		usuarioServicio.guardar(registro);
+		
 		return "redirect:/registro?exito";
 	}
 }
