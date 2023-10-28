@@ -69,11 +69,23 @@ public class FormularioControlador {
 	public String guardarPrograma(@ModelAttribute("formulario") Formulario form) {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		Usuario usuario2 = usuarioRepositorio.findByEmail(authentication.getName());
-		form.setUsuario(usuario2);
-		EstadoUsuario estUsu = estadoRepositorio.getById(2);
-		usuario2.setEstado(estUsu);
-		formServ.save(form);
-		return "redirect:/programas";
+		if (usuario2.getEstado().getIdEst() == 2) {
+			return "redirect:/errorForm";
+		
+		} else {
+			
+			form.setUsuario(usuario2);
+			EstadoUsuario estUsu = estadoRepositorio.getById(2);
+			usuario2.setEstado(estUsu);
+			formServ.save(form);
+			return "redirect:/programas";
+			
+		}
+	}
+	
+	@GetMapping("/errorForm")
+	public String errorForm() {
+		return "error_form";
 	}
 	
 	@GetMapping
@@ -81,4 +93,6 @@ public class FormularioControlador {
 	    Usuario usuario = (Usuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 	    return ResponseEntity.ok(usuario);
 	}
+	
+	
 }
