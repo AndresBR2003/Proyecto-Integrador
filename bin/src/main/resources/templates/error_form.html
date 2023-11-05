@@ -3,54 +3,33 @@
 <head>
   <meta charset="UTF-8">
   <title>Registro de donación</title>
-  <link rel="stylesheet" href="/css/editarPrograma.css">
-  <script src="https://kit.fontawesome.com/26df1a260c.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="/css/inicio.css">
 </head>
 <body>
-    <header>
+
+    <header >
         <div class="logo-container">
           <img src="/img/logo.png" alt="Imagen" style="width: 10%; height: 10%;">
           <h1 style="text-align: left; font-family: Roboto, sans-serif; font-size: 24px; line-height: 1.5; padding-left: 3%;">Unidos por un Perú Mejor!</h1>
-        </div>  
-		    <nav class="nav-container">
-		      <ul class="list">		        
-				<li><a th:href="@{/inicio}">INICIO</a></li>
-		        <li><a href="/programas">PROGRAMAS</a></li>
-		        <li><a th:href="@{/quienesSomos}">QUIÉNES SOMOS</a></li>
-		      </ul>
-		      <div class="menu_ingresar">
-		        <img src="/img/arrow_10288803.png" alt="Imagen" style="width: 30px; height: 30px;" >
-		           <a th:href="@{/logout}">Cerrar sesión</a>
-		      </div>
-	        </nav>
+        </div>        
+        <nav class="nav-container">
+          <ul class="list">
+            <li><a th:href="@{/inicio}">INICIO</a></li>
+            <li><a th:href="@{/programas}">PROGRAMAS</a></li>
+            <li><a th:href="@{/quienesSomos}">QUIÉNES SOMOS</a></li>
+          </ul>
+          <div class="menu_ingresar">
+            <img src="/img/arrow_10288803.png" alt="Imagen" style="width: 30px; height: 30px;" >
+            <a th:href="@{/logout}">Cerrar sesión</a>
+          </div>  
+        </nav>
     </header>
-    <main class="container">
-      <form  th:action="@{/editarPrograma}" th:object="${programa}" method="post"   enctype="multipart/form-data">
-		  
-			<label>Programa ID : </label>
-			<input type="text" name="nombre" th:field="*{idPro}" class="form-control" readonly="readonly">
-	
-            <label for="nombrePro">Titulo del programa:</label>
-            <input type="text" name="nombrePro" th:field="*{nombrePro}" class="form-control" placeholder="" required><br>
-    
-            <label for="descripcionPro">Descripción:</label>
-            <input  type="text" name="descripcionPro" th:field="*{descripcionPro}" class="form-control" placeholder="" required><br>
-    
-            <label for="descripcionPro2">Actividades del voluntariado:</label>
-            <input type="text" name="actividades" th:field="*{actividades}" class="form-control" placeholder="" required><br>
-    
-            <label for="descripcionPro3">Horario</label>
-            <input  type="text" name="descripcionPro3" th:field="*{descripcionPro3}" class="form-control" placeholder="" required><br>
-    
-            <label for="imagenPro">Imagen del programa:</label>
-            <input type="file"  name="imagenPro" th:field="*{imagenPro}" accept="image/*" ><br>
-  
-          	<div class="btn-nuevoPro">
-            		<input class= "btn" type="submit" value="editar" >
-          	</div>
-          
-      </form>
-  </main>
+    <main>
+		<div>     
+	      <h1>ERROR</h1>
+	      <p>Ya tienes un formulario creado</p>
+		</div>
+    </main>
 	  <footer class = "footer container" style="border: 1px solid #000; ">
 	    <div class="footer-link"> 
 	      <div class ="links">
@@ -99,5 +78,6 @@
 	    </div>
 	    <p  class="copyright" style="text-align: center; font-family: Roboto, sans-serif; font-size: 12px;">© 2023 Unidos por un Perú Mejor</p>
 	  </footer>
+  
 </body>
 </html>
