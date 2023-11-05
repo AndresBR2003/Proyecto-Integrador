@@ -70,8 +70,8 @@ public class ProgramaControlador {
                 // Guardar la imagen en una ubicación específica
                 // Puedes usar una ruta absoluta o relativa según tus necesidades
                 
-                //String filePath = "C:/Users/brice/git/prueba-proyectointegrador/src/main/resources/static/imagen" + File.separator + programa.getImagenPro().getOriginalFilename();
-                //Files.write(Paths.get(filePath), bytes);
+                String filePath = "src/main/resources/static/imagen" + File.separator + programa.getImagenPro().getOriginalFilename();
+                Files.write(Paths.get(filePath), bytes);
                 
                 Programa nuevoPrograma = new Programa();
                 
@@ -103,8 +103,8 @@ public class ProgramaControlador {
                 // Guardar la imagen en una ubicación específica
                 // Puedes usar una ruta absoluta o relativa según tus necesidades
                 
-                //String filePath = "C:/Users/brice/git/prueba-proyectointegrador/src/main/resources/static/imagen" + File.separator + programa.getImagenPro().getOriginalFilename();
-                //Files.write(Paths.get(filePath), bytes);
+                String filePath = "src/main/resources/static/imagen" + File.separator + programa.getImagenPro().getOriginalFilename();
+                Files.write(Paths.get(filePath), bytes);
                 
                 Programa nuevoPrograma = programaServicio.get(programa.getIdPro());
                 
@@ -112,7 +112,7 @@ public class ProgramaControlador {
                 nuevoPrograma.setDescripcionPro(programa.getDescripcionPro());
                 nuevoPrograma.setActividades(programa.getActividades());
                 nuevoPrograma.setDescripcionPro3(programa.getDescripcionPro3());
-                //nuevoPrograma.setImagenPro("/imagen/"+ programa.getImagenPro().getOriginalFilename());
+                nuevoPrograma.setImagenPro("/imagen/"+ programa.getImagenPro().getOriginalFilename());
                 
                 programaServicio.save(nuevoPrograma);
 
