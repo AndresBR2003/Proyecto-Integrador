@@ -13,4 +13,5 @@ public interface FormularioServicio {
 	public Formulario get(Long idForm);
 	public void delete(Long idForm);
 	public List<Formulario> listFormsByProgram (Programa idPro);
+	public List<Formulario> findByUsuario(Long id);
 }

@@ -43,4 +43,9 @@ public class FormularioServicioImpl implements FormularioServicio{
 		return formRepo.findByPrograma(idPro);
 	}
 
+	@Override
+	public List<Formulario> findByUsuario(Long id) {
+		return formRepo.findByUsuario(id);
+	}
+
 }

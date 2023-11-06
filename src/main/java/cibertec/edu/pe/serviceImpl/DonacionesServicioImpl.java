@@ -1,5 +1,7 @@
 package cibertec.edu.pe.serviceImpl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,6 +24,11 @@ public class DonacionesServicioImpl implements DonacionesServicio{
 	@Override
 	public Donaciones get(Long idDona) {
 		return donaRepo.findById(idDona).get();
+	}
+
+	@Override
+	public List<Donaciones> findByUsuario(Long id) {
+		return donaRepo.findByUsuario(id);
 	}
 
 }

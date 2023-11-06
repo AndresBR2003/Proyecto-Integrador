@@ -12,4 +12,6 @@ public interface FormularioRepositorio extends JpaRepository<Formulario, Long>{
 
 	@Query("SELECT f FROM Formulario f WHERE f.estado = true AND f.programa = ?1")
 	List<Formulario> findByPrograma (Programa idPro);
+
+	List<Formulario> findByUsuario(Long id);
 }
