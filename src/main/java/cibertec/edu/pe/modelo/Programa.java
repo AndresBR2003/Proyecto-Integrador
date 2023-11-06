@@ -4,9 +4,11 @@ import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -25,6 +27,10 @@ public class Programa {
 	private String imagenPro;
 	
 	private boolean estado;
+	
+	@OneToOne(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
+	@JoinColumn(name = "id")
+	private Usuario usuario;
 
 	@OneToMany(mappedBy = "programa", cascade = CascadeType.ALL)
 	private Set<Formulario> formularios;

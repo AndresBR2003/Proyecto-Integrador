@@ -1,8 +1,10 @@
 package cibertec.edu.pe.controlador;
 
 import java.security.Principal;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.core.Authentication;
@@ -93,6 +95,60 @@ public class FormularioControlador {
 	    Usuario usuario = (Usuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 	    return ResponseEntity.ok(usuario);
 	}
+	
+	@RequestMapping("/postulaciones")
+	public String verPaginaDePostulaciones(Model modelo, @Param("idPro") Programa idPro ) {
+		
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		Usuario jefePro = usuarioRepositorio.findByEmail(authentication.getName());
+		idPro = jefePro.getIdPrograma();
+		
+		
+		List<Formulario> listaForms = formServ.listFormsByProgram(idPro);
+		modelo.addAttribute("listaForms",listaForms);
+        
+
+		return "postulaciones";
+	}
+	
+	
+	@RequestMapping("/mostrarForm/{idPro}")
+	public ModelAndView mostrarFormulario(@PathVariable(name = "idForm") Long idForm) {
+		ModelAndView modelo = new ModelAndView("formulario");
+
+		Formulario form = formServ.get(idForm);
+		modelo.addObject("formulario", form);
+
+		return modelo;
+	}
+	
+	@PostMapping("/cambiarEstadoRechazado/{idForm}")
+    public String cambiarEstadoRechazado(@PathVariable Long idForm) {
+        Formulario formulario = formServ.get(idForm);
+        Usuario usuario1 = formulario.getUsuario();
+        
+        formulario.setEstado(false); // Cambiar el estado a false
+        EstadoUsuario estUsu = estadoRepositorio.getById(1);
+        usuario1.setEstado(estUsu);
+        formServ.save(formulario);
+        
+
+        return "redirect:/postulaciones";
+    }
+	
+	@PostMapping("/cambiarEstadoAceptado/{idForm}")
+    public String cambiarEstadoAceptado(@PathVariable Long idForm) {
+        Formulario formulario = formServ.get(idForm);
+        Usuario usuario1 = formulario.getUsuario();
+        
+        formulario.setEstado(false); // Cambiar el estado a false
+        EstadoUsuario estUsu = estadoRepositorio.getById(3);
+        usuario1.setEstado(estUsu);
+
+        formServ.save(formulario);
+
+        return "redirect:/postulaciones";
+    }
 	
 	
 }

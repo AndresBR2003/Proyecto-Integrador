@@ -44,6 +44,9 @@ public class Usuario {
 	
 	private int rol;
 	
+	@OneToOne(mappedBy = "usuario", cascade = CascadeType.ALL)
+	private Programa programa;
+	
 	@ManyToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
 	@JoinTable(
 			name = "usuarios_roles",
@@ -69,7 +72,13 @@ public class Usuario {
 	
 	
 	
-	
+	public Programa getIdPrograma() {
+		return programa;
+	}
+
+	public void setIdPrograma(Programa programa) {
+		this.programa = programa;
+	}
 	
 	
 	public int getRol() {
@@ -237,6 +246,25 @@ public class Usuario {
 		this.email = email;
 		this.password = password;
 		this.rol = rol;
+		this.roles = roles;
+		this.estado = estado;
+		this.formulario = formulario;
+		this.donaciones = donaciones;
+	}
+
+	public Usuario(Long id, String nombre, String apellido, String dNI_CE, String celular, String email,
+			String password, int rol, Programa programa, Collection<Rol> roles, EstadoUsuario estado,
+			Formulario formulario, Donaciones donaciones) {
+		super();
+		this.id = id;
+		this.nombre = nombre;
+		this.apellido = apellido;
+		DNI_CE = dNI_CE;
+		Celular = celular;
+		this.email = email;
+		this.password = password;
+		this.rol = rol;
+		this.programa = programa;
 		this.roles = roles;
 		this.estado = estado;
 		this.formulario = formulario;

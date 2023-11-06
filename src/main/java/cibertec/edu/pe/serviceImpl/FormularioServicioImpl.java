@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import cibertec.edu.pe.modelo.Formulario;
+import cibertec.edu.pe.modelo.Programa;
 import cibertec.edu.pe.repositorio.FormularioRepositorio;
 import cibertec.edu.pe.servicio.FormularioServicio;
 
@@ -35,6 +36,11 @@ public class FormularioServicioImpl implements FormularioServicio{
 	public void delete(Long idForm) {
 		formRepo.deleteById(idForm);
 		
+	}
+
+	@Override
+	public List<Formulario> listFormsByProgram(Programa idPro) {
+		return formRepo.findByPrograma(idPro);
 	}
 
 }

@@ -23,6 +23,8 @@ public class Formulario {
 	private String antecedentesForm;
 	private String copiaDNI_CEForm;
 	
+	private Boolean estado;
+	
 	@OneToOne(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
 	@JoinColumn(name = "id")
 	private Usuario usuario;
@@ -30,6 +32,15 @@ public class Formulario {
 	@ManyToOne
 	@JoinColumn(name = "idPro")
 	private Programa programa;
+	
+	
+	public Boolean isEstado() {
+		return estado;
+	}
+
+	public void setEstado(Boolean estado) {
+		this.estado = estado;
+	}
 
 	public Long getIdForm() {
 		return idForm;
@@ -90,7 +101,7 @@ public class Formulario {
 	
 
 	public Formulario(Long idForm, String cvForm, String cartaForm, String antecedentesForm, String copiaDNI_CEForm, 
-			Usuario usuario, Programa programa) {
+			Usuario usuario, Programa programa, Boolean estado) {
 		super();
 		this.idForm = idForm;
 		this.cvForm = cvForm;
@@ -99,11 +110,14 @@ public class Formulario {
 		this.copiaDNI_CEForm = copiaDNI_CEForm;
 		this.usuario = usuario;
 		this.programa = programa;
+		this.estado = estado;
 	}
 
 
 
 	public Formulario() {
+		super();
+		this.estado = true;
 	}
 
 }
