@@ -70,7 +70,7 @@ public class ProgramaControlador {
                 // Guardar la imagen en una ubicación específica
                 // Puedes usar una ruta absoluta o relativa según tus necesidades
                 
-                String filePath = "apiperumejor/src/main/resources/static/imagen" + File.separator + programa.getImagenPro().getOriginalFilename();
+                String filePath = "/app/src/main/resources/static/imagen" + File.separator + programa.getImagenPro().getOriginalFilename();
                 Files.write(Paths.get(filePath), bytes);
                 
                 Programa nuevoPrograma = new Programa();
