@@ -2,6 +2,7 @@ package cibertec.edu.pe.controlador;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.FileSystems;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -79,12 +80,11 @@ public class ProgramaControlador {
                 nuevoPrograma.setDescripcionPro(programa.getDescripcionPro());
                 nuevoPrograma.setActividades(programa.getActividades());
                 nuevoPrograma.setDescripcionPro3(programa.getDescripcionPro3());
-                nuevoPrograma.setImagenPro("/imagen/"+ programa.getImagenPro().getOriginalFilename());
-                
+                nuevoPrograma.setImagenPro("/imagen/"+ programa.getImagenPro().getOriginalFilename());               
                 programaServicio.save(nuevoPrograma);
-
-                return "redirect:/programas";				
-			
+                
+                
+                return "redirect:/programas";
 			}
 			catch (Exception e) {
 				// TODO: handle exception
