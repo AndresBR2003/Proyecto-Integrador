@@ -89,6 +89,11 @@ public class UsuarioServicioImpl implements UsuarioServicio {
 		return usuarioRepositorio.findById(id).get();
 	}
 
+	@Override
+	public Usuario actualizar(Usuario usuario) {
+		return usuarioRepositorio.save(usuario);
+	}
+
 
 
 

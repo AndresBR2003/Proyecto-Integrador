@@ -3,6 +3,8 @@ package cibertec.edu.pe.controlador;
 import java.security.SecureRandom;
 import java.util.List;
 
+import javax.annotation.security.PermitAll;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpHeaders;
@@ -30,16 +32,12 @@ import cibertec.edu.pe.modelo.Usuario;
 import cibertec.edu.pe.servicio.ProgramaServicio;
 import cibertec.edu.pe.servicio.UsuarioServicio;
 
-
 @RestController
 @Controller
 public class ChatBotController {
 	
 	@Autowired
 	private UsuarioServicio servicio;
-	
-	@Autowired
-	private ProgramaServicio programaServicio;
 	
 	
 	@PostMapping("/actualizarContrasenia")
@@ -50,6 +48,7 @@ public class ChatBotController {
 		if(usuario1.getDNI_CE().equals(usuReq.getDNI_CE())) {
 			String clave = generarContrasena();
 			usuario1.setPassword(clave);
+			servicio.actualizar(usuario1);
 			
 			UsuarioResponseDTO dto = new UsuarioResponseDTO();
 			dto.setEmail(usuario1.getEmail());
@@ -61,6 +60,16 @@ public class ChatBotController {
 		}
 		UsuarioResponseDTO dto = new UsuarioResponseDTO();
 		dto.setEmail("error");
+		return dto;
+	}
+	
+	@GetMapping("/obtenerUsuxd")
+	public UsuarioResponseDTO obtenerUsu() {
+		Usuario usuario1 = servicio.findByEmail("100@gmail.com");
+		UsuarioResponseDTO dto = new UsuarioResponseDTO();
+		dto.setEmail(usuario1.getEmail());
+		dto.setPassword(usuario1.getPassword());
+		
 		return dto;
 	}
 

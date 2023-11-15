@@ -19,5 +19,8 @@ public interface UsuarioServicio extends UserDetailsService{
 	
 	public Usuario get(Long id);
 	
+	public Usuario actualizar (Usuario usuario);
+
+	
 	
 }

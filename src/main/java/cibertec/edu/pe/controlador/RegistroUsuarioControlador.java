@@ -1,11 +1,16 @@
 package cibertec.edu.pe.controlador;
 
+import java.security.SecureRandom;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import cibertec.edu.pe.DTO.UsuarioRequestDTO;
+import cibertec.edu.pe.DTO.UsuarioResponseDTO;
 import cibertec.edu.pe.modelo.Usuario;
 import cibertec.edu.pe.servicio.UsuarioServicio;
 
@@ -37,4 +42,6 @@ public class RegistroUsuarioControlador {
 		
 		return "redirect:/registro?exito";
 	}
+	
+	
 }
