@@ -12,6 +12,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -39,6 +40,9 @@ public class ChatBotController {
 	@Autowired
 	private UsuarioServicio servicio;
 	
+	@Autowired
+	private PasswordEncoder passwordEncoder;
+	
 	
 	@PostMapping("/actualizarContrasenia")
 	public UsuarioResponseDTO  actualziarContraseña(@RequestBody UsuarioRequestDTO usuReq) {
@@ -47,7 +51,7 @@ public class ChatBotController {
 		
 		if(usuario1.getDNI_CE().equals(usuReq.getDNI_CE())) {
 			String clave = generarContrasena();
-			usuario1.setPassword(clave);
+			usuario1.setPassword(passwordEncoder.encode(clave));
 			servicio.actualizar(usuario1);
 			
 			UsuarioResponseDTO dto = new UsuarioResponseDTO();
