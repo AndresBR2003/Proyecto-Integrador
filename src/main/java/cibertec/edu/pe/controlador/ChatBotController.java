@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import cibertec.edu.pe.DTO.UsuarioRequestDTO;
 import cibertec.edu.pe.DTO.UsuarioResponseDTO;
 import cibertec.edu.pe.modelo.Donaciones;
 import cibertec.edu.pe.modelo.Programa;
@@ -41,7 +42,7 @@ public class ChatBotController {
 	private ProgramaServicio programaServicio;
 	
 	
-	/*@PostMapping("/actualizarContrasenia")
+	@PostMapping("/actualizarContrasenia")
 	public UsuarioResponseDTO  actualziarContraseña(@RequestBody UsuarioRequestDTO usuReq) {
 		
 		Usuario usuario1 = servicio.findByEmail(usuReq.getEmail());
@@ -61,20 +62,8 @@ public class ChatBotController {
 		UsuarioResponseDTO dto = new UsuarioResponseDTO();
 		dto.setEmail("error");
 		return dto;
-
-		
-	}*/
-	
-	@GetMapping("/programaUsu")
-	public UsuarioResponseDTO devUsu() {
-	    
-		Usuario usuario1 = servicio.findByEmail("100@gmail.com");
-		UsuarioResponseDTO dto = new UsuarioResponseDTO();
-		dto.setEmail(usuario1.getEmail());
-		dto.setPassword(usuario1.getPassword());
-	        return dto;
 	}
-	
+
 	
 	public static String generarContrasena() {
         // Definir caracteres permitidos en la contraseña
