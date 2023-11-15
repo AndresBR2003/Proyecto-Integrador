@@ -45,7 +45,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
 				"/js/**",
 				"/css/**",
 				"/img/**",
-				"/programaUsu")
+				"/actualizarContrasenia")
 		.permitAll()
 		.anyRequest()
 		.authenticated()
