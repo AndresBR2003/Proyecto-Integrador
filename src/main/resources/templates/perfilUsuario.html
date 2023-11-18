@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head> 
+	<meta charset="UTF-8">
+	<title>Registro de donación</title>
+	<link rel="stylesheet" href="/css/perfilusuario.css">
+	<script src="https://kit.fontawesome.com/26df1a260c.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+	<header>
+		<div class="logo-container">
+			<img src="/img/logo.png" alt="Imagen" style="width: 10%; height: 10%;">
+			<h1
+				style="text-align: left; font-family: Roboto, sans-serif; font-size: 24px; line-height: 1.5; padding-left: 3%;">
+				Unidos por un Perú Mejor!</h1>
+		</div>
+		<nav class="nav-container">
+			<ul class="list">
+				<li><a th:href="@{/inicio}">INICIO</a></li>
+				<li><a href="/programas">PROGRAMAS</a></li>
+				<li><a th:href="@{/quienesSomos}">QUIÉNES SOMOS</a></li>
+			</ul>
+		    <div class="menu_ingresar">
+				<img src="img/arrow_10288803.png" alt="Imagen" style="width: 30px; height: 30px;">
+				<select onchange="location = this.value;">
+					<option value="" selected disabled hidden>Más Opciones</option>
+					<option th:href="@{/donacionesXUsuario}" value="/donacionesXUsuario" >Mi Perfil</option>
+					<option class="cerrar" th:href="@{/logout}" value="/login?logout">Cerrar sesión</option>
+				</select>
+			</div>
+		</nav>
+	</header>
+
+<main class="principal" > 
+        
+
+        <div class="div1" th:action="@{/donacionesXUsuario}"  method="post">
+			<div class="img">
+				<img src="/img/user.png" class="imgperfil" alt="agregar_imagen_perfil">
+			</div>
+
+            <h3><strong>Datos Personales</strong></h3>
+            <div class="datos">
+                <p><strong>Nombres:</strong></p>
+                <label th:text="${usuario.nombre}"></label>
+            </div>
+            <br>
+            <div class="datos"> 
+                <p><strong>Apellidos:</strong></p>
+                <label th:text="${usuario.apellido}"></label>
+            </div>
+            <br>
+            <div class="datos">
+                <p><strong>DNI/C.E:</strong></p>
+                <label th:text="${usuario.DNI_CE}"></label>
+            </div>
+            <br>
+            <div class="datos">
+                <p><strong>Celular:</strong> </p>
+                <label th:text="${usuario.Celular}"></label>
+            </div>
+            <br>
+            <div class="datos"> 
+                <p><strong>Correo:</strong></p>
+                <label th:text="${usuario.email}"></label>
+            </div>
+            <br>
+            
+        </div>
+        <br>
+        
+        
+		<div  class="actividades">
+		    <h3><strong>Actividades culminadas:</strong></h3>
+		    <div class="datos">
+		        <p><strong>Programa:</strong></p>
+		        <th:block th:if="${usuario.estado.idEst == 3}"> <!-- Suponiendo que el estado "voluntario" tiene el id 3 -->
+		            <label th:text="${usuario.formulario != null && usuario.formulario.programa != null ? usuario.formulario.programa.nombrePro : 'No está inscrito en ningún programa.'}"></label>
+		        </th:block>
+		        <th:block th:if="${usuario.estado.idEst != 3}">
+		            <p>No está inscrito en ningún programa.</p>
+		        </th:block>
+		    </div>
+		    
+		    <br>
+		    <div class="datos">
+		        <p><strong>Estado:</strong></p>
+		        <label th:text="${usuario.estado.nombreEst}"></label>
+		    </div>
+		    <br>
+		
+		<h3><strong>Donaciones realizadas:</strong></h3>
+		<div class="datos">
+			<ul>
+				<li th:each="donaciones : ${donaciones}" th:text="${donaciones.programa.nombrePro}"></li>
+			</ul>
+			   
+		</div>
+		
+		</div>
+
+        
+
+
+</main>
+
+<footer class="footer container" style="border: 1px solid #000; ">
+	<div class="footer-link">
+		<div class="links">
+			<ul style="text-align: left;">
+				<li>Unidos por un Perú mejor es una asociación legalmente constituida e inscrita como UPM(N° Registro
+					4563)
+					en la Agencia Peruana de Cooperación Nacional para el Desarrollo e inscrita en el Registro de
+					Asociaciones en Perú como Asociación independiente con Número de Identificación Fiscal G4285273.
+				</li>
+				<li>
+					<img src="/img/location_535239.png" alt="Imagen" style="width: 30px; height: 30px;">
+					<p> Av. Las Nazarenas 123, Santiago de Surco, Lima, Perú</p>
+				</li>
+				<li>
+					<img src="/img/phone_1151429.png" alt="Imagen" style="width: 30px; height: 30px;">
+					<p> 01 2453689</p>
+				</li>
+				<li>
+					<img src="/img/whatsapp_2111774.png" alt="Imagen" style="width: 30px; height: 30px;">
+					<p>+51 954623887</p>
+				</li>
+			</ul>
+		</div>
+		<div class="links">
+			<ul style="text-align: left;">
+				<li>
+					<img src="/img/facebook_665209.png" alt="Imagen" style="width: 30px; height: 30px;">
+					<a href="#"> Unidos por un Perú Mejor</a>
+				</li>
+				<li>
+					<img src="/img/email_2989993.png" alt="Imagen" style="width: 30px; height: 30px;">
+					<a href="#"> unidosporunperumejor@gmail.com</a>
+				</li>
+				<li>
+					<img src="/img/twitter_665228.png" alt="Imagen" style="width: 30px; height: 30px;">
+					<a href="#">Unidos por un Perú Mejor</a>
+				</li>
+				<li>
+					<img src="/img/instagram_1077042.png" alt="Imagen" style="width: 30px; height: 30px;">
+					<a href="#">@UnidosporunPerúMejor</a>
+				</li>
+			</ul>
+		</div>
+	</div>
+	<p class="copyright" style="text-align: center; font-family: Roboto, sans-serif; font-size: 12px;">© 2023 Unidos por
+		un Perú Mejor</p>
+
+</footer>
+
+</body>
+
+</html>

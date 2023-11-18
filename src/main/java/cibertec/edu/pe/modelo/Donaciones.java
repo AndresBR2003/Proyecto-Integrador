@@ -50,14 +50,7 @@ public class Donaciones {
 		this.programa = programa;
 	}
 
-
-
-
-
-
-
 	
-
 
 //
 	public Usuario getUsuario() {

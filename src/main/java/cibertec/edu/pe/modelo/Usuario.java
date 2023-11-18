@@ -15,6 +15,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
@@ -45,7 +46,9 @@ public class Usuario {
 	private int rol;
 	
 	@OneToOne(mappedBy = "usuario", cascade = CascadeType.ALL)
-	private Programa programa;
+	private Programa programa ;
+	
+
 	
 	@ManyToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
 	@JoinTable(
@@ -65,13 +68,21 @@ public class Usuario {
 	
 	@OneToOne(mappedBy = "usuario", cascade = CascadeType.ALL)
 	private Formulario formulario;
+
 	
-	@OneToOne(mappedBy = "usuario", cascade = CascadeType.ALL)
-    private Donaciones donaciones;
+	@OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
+	private List<Donaciones> donaciones = new ArrayList<>();
 	
 	
-	
-	
+
+	public Programa getPrograma() {
+		return programa;
+	}
+
+	public void setPrograma(Programa programa) {
+		this.programa =  programa;
+	}
+
 	public Programa getIdPrograma() {
 		return programa;
 	}
@@ -89,11 +100,11 @@ public class Usuario {
 		this.rol = rol;
 	}
 
-	public Donaciones getDonaciones() {
+	public List<Donaciones> getDonaciones() {
 		return donaciones;
 	}
 
-	public void setDonaciones(Donaciones donaciones) {
+	public void setDonaciones(List<Donaciones> donaciones) {
 		this.donaciones = donaciones;
 	}
 
@@ -236,7 +247,7 @@ public class Usuario {
 
 	public Usuario(Long id, String nombre, String apellido, String dNI_CE, String celular, String email,
 			String password, int rol, Collection<Rol> roles, EstadoUsuario estado, Formulario formulario,
-			Donaciones donaciones) {
+			List<Donaciones> donaciones) {
 		super();
 		this.id = id;
 		this.nombre = nombre;
@@ -254,7 +265,7 @@ public class Usuario {
 
 	public Usuario(Long id, String nombre, String apellido, String dNI_CE, String celular, String email,
 			String password, int rol, Programa programa, Collection<Rol> roles, EstadoUsuario estado,
-			Formulario formulario, Donaciones donaciones) {
+			Formulario formulario, List<Donaciones> donaciones) {
 		super();
 		this.id = id;
 		this.nombre = nombre;
@@ -270,9 +281,8 @@ public class Usuario {
 		this.formulario = formulario;
 		this.donaciones = donaciones;
 	}
-	
-	
 
 
+	
 
 }

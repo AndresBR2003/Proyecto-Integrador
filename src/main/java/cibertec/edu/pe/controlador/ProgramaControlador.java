@@ -1,15 +1,17 @@
 package cibertec.edu.pe.controlador;
 
-import java.io.File;
+
 import java.io.IOException;
-import java.nio.file.FileSystems;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -18,7 +20,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.client.RestTemplate;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -67,24 +69,19 @@ public class ProgramaControlador {
 		
 		if (!programa.getImagenPro().isEmpty()) {
 			try {
-                byte[] bytes = programa.getImagenPro().getBytes();
-                // Guardar la imagen en una ubicación específica
-                // Puedes usar una ruta absoluta o relativa según tus necesidades
-                
-                String filePath = "/app/src/main/resources/static/imagen" + File.separator + programa.getImagenPro().getOriginalFilename();
-                Files.write(Paths.get(filePath), bytes);
-                
+
                 Programa nuevoPrograma = new Programa();
                 
                 nuevoPrograma.setNombrePro(programa.getNombrePro());
                 nuevoPrograma.setDescripcionPro(programa.getDescripcionPro());
                 nuevoPrograma.setActividades(programa.getActividades());
                 nuevoPrograma.setDescripcionPro3(programa.getDescripcionPro3());
-                nuevoPrograma.setImagenPro("/imagen/"+ programa.getImagenPro().getOriginalFilename());               
+                nuevoPrograma.setImagenPro(ObtenerUrl(programa.getImagenPro()));
+                
                 programaServicio.save(nuevoPrograma);
-                
-                
-                return "redirect:/programas";
+
+                return "redirect:/programas";				
+			
 			}
 			catch (Exception e) {
 				// TODO: handle exception
@@ -93,18 +90,34 @@ public class ProgramaControlador {
 		return null;		
 }
 	
+	public String ObtenerUrl(MultipartFile imagen ) throws IOException {
+		
+		String imgurApiUrl = "https://api.imgur.com/3/image";
+        String imgurClientId = "6d069b2c4acdf44";
+        String url = "";
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.set("Authorization", "Client-ID " + imgurClientId);
+
+        MultipartFile image = imagen;
+        HttpEntity<byte[]> requestEntity = new HttpEntity<>(image.getBytes(), headers);
+
+        RestTemplate restTemplate = new RestTemplate();
+        ResponseEntity<Map> responseEntity = restTemplate.exchange(imgurApiUrl, HttpMethod.POST, requestEntity, Map.class);
+
+        if (responseEntity.getStatusCode().is2xxSuccessful()) {
+            Map<String, Object> body = responseEntity.getBody();
+            url = (String) ((Map) body.get("data")).get("link");
+        }
+		return url;
+	}
+	
 	
 	@PostMapping("/editarPrograma")
 	public String editarPrograma(@ModelAttribute("programa") intermediaPrograma programa) {
 		
 		if (!programa.getImagenPro().isEmpty()) {
 			try {
-                byte[] bytes = programa.getImagenPro().getBytes();
-                // Guardar la imagen en una ubicación específica
-                // Puedes usar una ruta absoluta o relativa según tus necesidades
-                
-                String filePath = "/app/src/main/resources/static/imagen" + File.separator + programa.getImagenPro().getOriginalFilename();
-                Files.write(Paths.get(filePath), bytes);
                 
                 Programa nuevoPrograma = programaServicio.get(programa.getIdPro());
                 
@@ -112,7 +125,7 @@ public class ProgramaControlador {
                 nuevoPrograma.setDescripcionPro(programa.getDescripcionPro());
                 nuevoPrograma.setActividades(programa.getActividades());
                 nuevoPrograma.setDescripcionPro3(programa.getDescripcionPro3());
-                nuevoPrograma.setImagenPro("/imagen/"+ programa.getImagenPro().getOriginalFilename());
+                nuevoPrograma.setImagenPro(ObtenerUrl(programa.getImagenPro()));
                 
                 programaServicio.save(nuevoPrograma);
 

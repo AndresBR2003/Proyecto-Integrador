@@ -49,10 +49,45 @@ body {
 
  }
 
- .menu_ingresar img, .menu_ingresar a{
+  .menu_ingresar img{
     display: inline-block;
     vertical-align: middle;
   }
+  
+	.menu_ingresar select {
+	    padding: 10px;
+	    font-size: 14px;
+	    border: 1px solid #ccc;
+	    border-radius: 4px;
+	    margin-right: 10px;
+	    background-color: rgb(25, 136, 139);
+	    position: relative;
+	    z-index: 1;
+	}
+	
+	.menu_ingresar select option {
+	    padding: 12px;
+	    font-size: 16px;
+	    background-color: rgb(40, 165, 155);
+	}
+	
+		/* Estilos para la lista desplegable */
+		.menu_ingresar .js-example-basic-single {
+			width: 100%;
+			/* Ajusta el ancho según tus necesidades */
+		}
+	
+		/* Estilos para las opciones de la lista desplegable */
+		.menu_ingresar .js-example-basic-single option {
+			font-weight: normal;
+			/* Restaura el peso de la fuente a normal para todas las opciones */
+		}
+	
+		/* Estilo para la opción seleccionada */
+		.menu_ingresar .js-example-basic-single option:checked {
+			font-weight: bold;
+			/* Aplica negrita a la opción seleccionada */
+		}
 
   .login {
     

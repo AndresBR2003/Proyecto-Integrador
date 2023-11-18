@@ -2,6 +2,7 @@ package cibertec.edu.pe.controlador;
 
 import java.security.Principal;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
@@ -74,23 +75,29 @@ public class DonacionesControlador {
 	}
 	
 	@RequestMapping("/donacionesXUsuario")
-	public String verDonacionesPorUsuario(Model modelo) {		
+	public String verDonacionesPorUsuaria(Model modelo) {		
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         Usuario usuario = usuServi.findByEmail(authentication.getName());
-        modelo.addAttribute("usuario",usuario);
-				
-		List<Donaciones> listaDonaciones = donaServi.findByUsuario(usuario.getId());
-		modelo.addAttribute("listaProgramas",listaDonaciones);
-		
-		if(usuario.getEstado().getIdEst() == 3) {
-		
-		List<Formulario> listaForm = formService.findByUsuario(usuario.getId());
-		modelo.addAttribute("listaForm", listaForm); //Mediante la variable Programa de Formulario obtienes el programa al cual está dentro el usuario
+        
+      //listado de donaciones
+        List<Donaciones> donaciones = usuario.getDonaciones();
+        modelo.addAttribute("donaciones", donaciones);
+        
+        if (usuario.getEstado().getIdEst() == 3) {
+	
+        	Programa programa = usuario.getFormulario() != null ? usuario.getFormulario().getPrograma() : null;
+            modelo.addAttribute("usuario", usuario);
+            modelo.addAttribute("programa", programa);
+            return "perfilUsuario";
+        	
 		} else {
-			return "No está participando en ningun Programa";
+			
+			modelo.addAttribute("usuario", usuario);
+            modelo.addAttribute("mensaje", "El usuario no está participando en ningún programa como voluntario.");
+           return "perfilUsuario"; 
 		}
-		
 
-		return "perfilUsuario";
 	}
+
+
 }

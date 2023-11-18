@@ -18,12 +18,24 @@
             <li><a th:href="@{/inicio}">INICIO</a></li>
             <li><a th:href="@{/programas}">PROGRAMAS</a></li>
             <li><a th:href="@{/quienesSomos}">QUIÉNES SOMOS</a></li>
-            <li><a th:href="@{/postulaciones}">POSTULANTES</a></li>
+            <li th:if="${rol == 2}"><a  th:href="@{/postulaciones}">POSTULANTES</a></li>
       </ul>
-      <div class="menu_ingresar">
-        <img src="/img/arrow_10288803.png" alt="Imagen" style="width: 30px; height: 30px;" >
-        <a th:href="@{/logout}">Cerrar sesión</a>
-      </div>
+      
+      <form th:value="${palabraClave}">
+			<div class="buscador">	
+				<input type="text" name="palabraClave" placeholder="Buscar...">
+            	<button><img src="img/buscador.png" alt="lupa"></button>
+            </div>	
+      </form>
+      
+		    <div class="menu_ingresar">
+				<img src="img/arrow_10288803.png" alt="Imagen" style="width: 30px; height: 30px;">
+				<select onchange="location = this.value;">
+					<option value="" selected disabled hidden>Más Opciones</option>
+					<option th:href="@{/donacionesXUsuario}" value="/donacionesXUsuario" >Mi Perfil</option>
+					<option class="cerrar" th:href="@{/logout}" value="/login?logout">Cerrar sesión</option>
+				</select>
+			</div>
     </nav>
   </header>
 

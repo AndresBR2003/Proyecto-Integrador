@@ -7,23 +7,29 @@
   <script src="https://kit.fontawesome.com/26df1a260c.js" crossorigin="anonymous"></script>
 </head>
 <body>
-    <header>
-        <div class="logo-container">
-          <img src="/img/logo.png" alt="Imagen" style="width: 10%; height: 10%;">
-          <h1 style="text-align: left; font-family: Roboto, sans-serif; font-size: 24px; line-height: 1.5; padding-left: 3%;">Unidos por un Perú Mejor!</h1>
-        </div>  
-		    <nav class="nav-container">
-		      <ul class="list">		        
+	<header>
+		<div class="logo-container">
+			<img src="/img/logo.png" alt="Imagen" style="width: 10%; height: 10%;">
+			<h1
+				style="text-align: left; font-family: Roboto, sans-serif; font-size: 24px; line-height: 1.5; padding-left: 3%;">
+				Unidos por un Perú Mejor!</h1>
+		</div>
+		<nav class="nav-container">
+			<ul class="list">
 				<li><a th:href="@{/inicio}">INICIO</a></li>
-		        <li><a href="/programas">PROGRAMAS</a></li>
-		        <li><a th:href="@{/quienesSomos}">QUIÉNES SOMOS</a></li>
-		      </ul>
-		      <div class="menu_ingresar">
-		        <img src="/img/arrow_10288803.png" alt="Imagen" style="width: 30px; height: 30px;" >
-		           <a th:href="@{/logout}">Cerrar sesión</a>
-		      </div>
-	        </nav>
-    </header>
+				<li><a href="/programas">PROGRAMAS</a></li>
+				<li><a th:href="@{/quienesSomos}">QUIÉNES SOMOS</a></li>
+			</ul>
+			<div class="menu_ingresar">
+				<img src="img/arrow_10288803.png" alt="Imagen" style="width: 30px; height: 30px;">
+				<select onchange="location = this.value;">
+					<option value="" selected disabled hidden>Más Opciones</option>
+					<option th:href="@{/donacionesXUsuario}" value="/donacionesXUsuario">Mi Perfil</option>
+					<option class="cerrar" th:href="@{/logout}" value="/login?logout">Cerrar sesión</option>
+				</select>
+			</div>
+		</nav>
+	</header>
     
 	<div th:if=${param.exito}>
 		<div class="alert alert-info">Se ha registrado la donacion exitosamente</div>

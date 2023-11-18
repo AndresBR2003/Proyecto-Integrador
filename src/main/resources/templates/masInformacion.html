@@ -17,12 +17,15 @@
 		        <li><a th:href="@{/inicio}">INICIO</a></li>
 		        <li><a href="/programas">PROGRAMAS</a></li>
 		        <li><a th:href="@{/quienesSomos}">QUIÉNES SOMOS</a></li>
-		        <li><a th:href="@{/postulaciones}">POSTULANTES</a></li>
 		      </ul>
-		      <div class="menu_ingresar">
-		        <img src="/img/arrow_10288803.png" alt="Imagen" style="width: 30px; height: 30px;" >
-		           <a class="cerrar"th:href="@{/logout}">Cerrar sesión</a>
-		      </div>
+		    <div class="menu_ingresar">
+				<img src="img/arrow_10288803.png" alt="Imagen" style="width: 30px; height: 30px;">
+				<select onchange="location = this.value;">
+					<option value="" selected disabled hidden>Más Opciones</option>
+					<option th:href="@{/donacionesXUsuario}" value="/donacionesXUsuario" >Mi Perfil</option>
+					<option class="cerrar" th:href="@{/logout}" value="/login?logout">Cerrar sesión</option>
+				</select>
+			</div>
         </nav>
     </header>
     <main th:action="@{/guardar}" th:object="${programa}" method="post" class="main-grid">
@@ -55,26 +58,37 @@
 		  <div class="modal-content">
 		    	<span class="close" id="closeModal">&times;</span>
 		    		<h3>Formulario de Participación</h3>
-		    	    <form th:action="@{/guardarFormulario}" th:object="${formulario}" method="post">
+		    		
+		    	    <form th:action="@{/guardarFormulario}" th:object="${formulario}" method="post" onsubmit="return uploadAllImages()">
 						
 						<input type="hidden" name="nombre" th:field="*{programa.idPro}" class="form-control" readonly="readonly">
 						
 				        <label for="cvForm">Cargar CV (PDF):</label>
-				        <input type="file" name="cvForm" th:field="*{cvForm}" accept="application/pdf" required><br>
+				        <input type="file" name="cvForm2" accept="application/pdf" onchange="updateFileList(this)" required><br>
+				        
 
 				        <label for="cartaForm">Cargar Carta (PDF):</label>
-				        <input type="file" name="cartaForm" th:field="*{cartaForm}" accept="application/pdf" required><br>
+				        <input type="file" name="cartaForm2" accept="application/pdf" onchange="updateFileList(this)" required><br>
+				       
 				
 				        <label for="antecedentesForm">Cargar Antecedentes (PDF):</label>
-				        <input type="file" name="antecedentesForm" th:field="*{antecedentesForm}" accept="application/pdf" required><br>
+				        <input type="file" name="antecedentesForm2" accept="application/pdf" onchange="updateFileList(this)" required><br>
+				        
 				
 				        <label for="copiaDNI_CEForm">Cargar Copia DNI/CE (PDF):</label>
-				        <input type="file" name="copiaDNI_CEForm" th:field="*{copiaDNI_CEForm}" accept="application/pdf" required><br>
+				        <input type="file" name="copiaDNI_CEForm2"  accept="application/pdf" onchange="updateFileList(this)" required><br>
+				        
+				        <input type="hidden" name="cvForm" id="cvFormUrl" th:value="${formulario.cvForm}" th:field="*{cvForm}" />
+						<input type="hidden" name="cartaForm" id="cartaFormUrl" th:value="${formulario.cartaForm}" th:field="*{cartaForm}" />
+						<input type="hidden" name="antecedentesForm" id="antecedentesFormUrl" th:value="${formulario.antecedentesForm}" th:field="*{antecedentesForm}" />
+						<input type="hidden" name="copiaDNI_CEForm" id="copiaDNI_CEFormUrl" th:value="${formulario.copiaDNI_CEForm}" th:field="*{copiaDNI_CEForm}" />
 				
 				        <input type="submit" value="Enviar">
 				    </form>
+				    
 		  </div>
 		</div>
+		
 		
   <footer class = "footer container" style="border: 1px solid #000; ">
     <div class="footer-link"> 
@@ -150,6 +164,98 @@
     document.head.appendChild(t);
   });
 </script>
+
+<script src="https://www.gstatic.com/firebasejs/10.5.2/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.5.2/firebase-database-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.5.2/firebase-storage-compat.js"></script>
+
+    <script type="module">
+       
+        const firebaseConfig = {
+    apiKey: "AIzaSyB-GQxaW7s-s__xYEC5H7AMZsyv2aSnxhc",
+    authDomain: "prueba-proyecto-nat.firebaseapp.com",
+    projectId: "prueba-proyecto-nat",
+    storageBucket: "prueba-proyecto-nat.appspot.com",
+    messagingSenderId: "964276743413",
+    appId: "1:964276743413:web:4561a2361ba1451ed3a9bc",
+    measurementId: "G-2KGKKPQTT1"
+  };
+        // Initialize Firebase
+        //const firebase = initializeApp(firebaseConfig);
+        firebase.initializeApp(firebaseConfig);
+    </script>
+
+    <script>
+        // Lista para almacenar los archivos seleccionados
+    let filesToUpload = [];
+
+    // Función para agregar o actualizar archivos en la lista
+    function updateFileList(input) {
+        const fieldName = input.name;
+        const file = input.files[0];
+
+        // Busca si ya hay un archivo para este campo en la lista
+        const existingFileIndex = filesToUpload.findIndex(file => file.fieldName === fieldName);
+
+        if (existingFileIndex !== -1) {
+            // Si ya existe, actualiza el archivo en la lista
+            filesToUpload[existingFileIndex] = { fieldName, file };
+        } else {
+            // Si no existe, agrega el nuevo archivo a la lista
+            filesToUpload.push({ fieldName, file });
+        }
+    }
+
+function uploadAllImages() {
+        // Evita que el formulario se envíe antes de subir los archivos
+        event.preventDefault();
+
+        // Verifica si hay archivos para subir
+        if (filesToUpload.length === 0) {
+            alert("Por favor, selecciona al menos un archivo.");
+            return false;
+        }
+        var cont = 0;
+
+        // Sube cada archivo al almacenamiento de Firebase
+        Promise.all(filesToUpload.map(({ fieldName, file }) => {
+            // Crea una referencia de almacenamiento
+            var storageRef = firebase.storage().ref(`prueba/${fieldName}_${file.name}`);
+
+            // Sube el archivo y devuelve la promesa resultante
+            return storageRef.put(file).then(snapshot => {
+                console.log(`Archivo ${file.name} subido.`);
+                return snapshot.ref.getDownloadURL().then(url => {
+                    console.log(`URL del archivo ${file.name}: ${url}`);
+                    switch (cont) {
+                        case 0:
+                            document.getElementById("cvFormUrl").value = url;
+                            break;
+                        case 1:
+                            document.getElementById("cartaFormUrl").value = url;
+                            break;
+                        case 2:
+                            document.getElementById("antecedentesFormUrl").value = url;
+                            break;
+                        case 3:
+                            document.getElementById("copiaDNI_CEFormUrl").value = url;
+                            break;
+                    }
+                    cont++;
+                });
+            });
+        })).then(urls => {
+            // Muestra las URLs en la consola o haz lo que necesites con ellas
+            console.log('URLs de archivos:', urls);
+            // Ahora puedes enviar el formulario al controlador
+            document.forms[0].submit();
+        }).catch(error => {
+            console.error('Error en la subida de archivos:', error);
+        });
+
+        return false;
+    }
+    </script>
   
 </body>
 </html>

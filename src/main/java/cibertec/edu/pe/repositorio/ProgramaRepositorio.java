@@ -15,4 +15,6 @@ public interface ProgramaRepositorio extends JpaRepository<Programa, Long>{
 	
 	@Query("SELECT p FROM Programa p WHERE p.estado = true")
 	public List<Programa> findByEstado();
+	
+
 }
