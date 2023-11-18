@@ -73,14 +73,17 @@
         
         
 		<div  class="actividades">
-		    <h3><strong>Actividades culminadas:</strong></h3>
+		    <h3><strong>Actividades:</strong></h3>
 		    <div class="datos">
 		        <p><strong>Programa:</strong></p>
 		        <th:block th:if="${usuario.estado.idEst == 3}"> <!-- Suponiendo que el estado "voluntario" tiene el id 3 -->
 		            <label th:text="${usuario.formulario != null && usuario.formulario.programa != null ? usuario.formulario.programa.nombrePro : 'No está inscrito en ningún programa.'}"></label>
 		        </th:block>
-		        <th:block th:if="${usuario.estado.idEst != 3}">
+		        <th:block th:if="${usuario.estado.idEst == 1}">
 		            <p>No está inscrito en ningún programa.</p>
+		        </th:block>
+		        <th:block th:if="${usuario.estado.idEst == 2}">
+		            <p>Estas en proceso de seleccion</p>
 		        </th:block>
 		    </div>
 		    
