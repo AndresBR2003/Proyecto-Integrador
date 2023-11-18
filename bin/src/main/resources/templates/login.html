@@ -58,6 +58,8 @@
       </form>
       		<div class="nuevo-user">
 				<span>Si eres nuevo usuario <a th:href="@{/registro}">regístrate aqui</a></span>
+				<br>
+				<span>Si perdiste tu contraseña pidele ayuda a nuestro bot</span>
 			</div>
     </div>
   </main>
@@ -110,6 +112,20 @@
 	    </div>
 	    <p  class="copyright" style="text-align: center; font-family: Roboto, sans-serif; font-size: 12px;">© 2023 Unidos por un Perú Mejor</p>
 	  </footer>
+	  
+	   <script>
+  window.watsonAssistantChatOptions = {
+    integrationID: "47b39308-3149-4472-b5c7-a71ff12e9e2e", // The ID of this integration.
+    region: "us-south", // The region your integration is hosted in.
+    serviceInstanceID: "30d3e299-5d3d-4955-b99e-d061ad0f40ca", // The ID of your service instance.
+    onLoad: async (instance) => { await instance.render(); }
+  };
+  setTimeout(function(){
+    const t=document.createElement('script');
+    t.src="https://web-chat.global.assistant.watson.appdomain.cloud/versions/" + (window.watsonAssistantChatOptions.clientVersion || 'latest') + "/WatsonAssistantChatEntry.js";
+    document.head.appendChild(t);
+  });
+</script>
 
 </body>
 

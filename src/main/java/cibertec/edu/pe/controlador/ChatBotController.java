@@ -67,15 +67,7 @@ public class ChatBotController {
 		return dto;
 	}
 	
-	@GetMapping("/obtenerUsuxd")
-	public UsuarioResponseDTO obtenerUsu() {
-		Usuario usuario1 = servicio.findByEmail("100@gmail.com");
-		UsuarioResponseDTO dto = new UsuarioResponseDTO();
-		dto.setEmail(usuario1.getEmail());
-		dto.setPassword(usuario1.getPassword());
-		
-		return dto;
-	}
+	
 
 	
 	public static String generarContrasena() {

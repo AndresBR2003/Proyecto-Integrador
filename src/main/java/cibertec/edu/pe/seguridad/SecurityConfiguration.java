@@ -48,20 +48,23 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
 	                "/js/**",
 	                "/css/**",
 	                "/img/**",
-	                "/obtenerUsu",
 	                "/actualizarContrasenia")
 	            .permitAll()
 	            .anyRequest()
-	            .authenticated())
+	            .authenticated()
+	            )
 	            .formLogin(login -> login
 	                .loginPage("/login")
-	                .permitAll())
+	                .permitAll()
+	                )
+	         
 	            .logout(logout -> logout
 	                .invalidateHttpSession(true)
 	                .clearAuthentication(true)
 	                .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
 	                .logoutSuccessUrl("/login?logout")
-	                .permitAll())
+	                .permitAll()
+	                )
 	    			.csrf().disable();  
 	}
 }

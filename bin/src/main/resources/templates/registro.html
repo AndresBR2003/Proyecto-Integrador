@@ -39,13 +39,13 @@
         <label for="nombre">Nombres : </label>
         <input id="nombre" type="text" placeholder="Ingrese sus Nombres" 
         	onfocus="clearPlaceholder(this)" th:field="*{nombre}" 
-        	required autofocus="autofocus">
+        	required autofocus="autofocus" oninput="allowOnlyLetters(event)">
       </div>
       <div class="formulario">
         <label for="apellidos">Apellidos : </label>
         <input type="text" id="apellido" placeholder="Ingrese sus Apellidos"
         	onfocus="clearPlaceholder(this)" th:field="*{apellido}"
-			required autofocus="autofocus">
+			required autofocus="autofocus" oninput="allowOnlyLetters(event)">
       </div>
       <div class="formulario">
         <label for="dni">DNI/C.E.: </label>
@@ -57,7 +57,7 @@
         <label for="celular">Celular : </label>
         <input type="tel" id="Celular" placeholder="Ingrese su número de celular"
         	 onfocus="clearPlaceholder(this)" th:field="*{Celular}"
-			 required autofocus="autofocus">
+			 required autofocus="autofocus" oninput="allowOnlyNumbersAndDecimal(event)">
       </div>
       <div class="formulario">
         <label for="correo">Correo Electrónico : </label>
@@ -74,6 +74,7 @@
 				<input type="submit" class="form-control btn btn-primary" 
 							 value="Registrar" />
 		<span>Si estas registrado <a th:href="@{/login}">inicia sesión aqui</a></span>
+		
     </form> 
   </main>
 
@@ -130,5 +131,20 @@
 	    </div>
 	    <p  class="copyright" style="text-align: center; font-family: Roboto, sans-serif; font-size: 12px;">© 2023 Unidos por un Perú Mejor</p>
 	  </footer>
+	  
+	  <script>
+    // Esta función permite solo letras en el campo de entrada
+    function allowOnlyLetters(event) {
+        const inputValue = event.target.value;
+        event.target.value = inputValue.replace(/[^A-Za-z\s]/g, '');
+    }
+</script>
+<script>
+    // Esta función permite solo números y un punto decimal en el campo de entrada
+    function allowOnlyNumbersAndDecimal(event) {
+        const inputValue = event.target.value;
+        event.target.value = inputValue.replace(/[^0-9.]/g, '');
+    }
+</script>
 </body>
 </html>

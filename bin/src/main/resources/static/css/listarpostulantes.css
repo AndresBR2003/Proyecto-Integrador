@@ -1,11 +1,10 @@
-/*HEADER*/
 
 * {
     padding : 0;
     margin : 0 ;
     box-sizing: border-box;
 }
-
+ 
 body {
     background-color: #f1f0f3;
     font-family: Arial, Helvetica, sans-serif;
@@ -117,151 +116,139 @@ body {
     font-size: 16px;
     text-decoration: none;
   }
-  
-    .buscador{
-    position: relative;
-
-  }
-
-  .buscador input{
-    padding: 10px;
-    padding-right: 35px;
-    border-radius: 5px 5px 5px 5px;
-    border: 1px solid #000;
-    outline: none;
-    font-size: 1rem;
-	width: 300px;
-  }
-
-  button{
-    background-color:  rgb(40, 165, 155);
-    padding: 10px 15px;
-    position: absolute;
-    border: 0;
-    top: 0;
-    bottom: 0;
-    right: 0;
-    margin: auto;
-    border-radius: 0 5px 5px 0;
-    color: #fff;
-    cursor: pointer;
-  }
-
-  button:hover{
-    background-color: rgb(25, 136, 139)
-  }
 
   /*MAIN*/
-  .maincard{
-    width: 90%;
-    display: flex;
+
+  .tabla{
+    width: 70vw;
+    height: 90vh;
     justify-content: center;
     align-items: center;
-    font-family: sans-serif;
-    margin-left: 90px;
-  }
-
-  .btn_agregar{
-    display: flex;
-    align-items: center;
-    justify-content: right;
-    margin-top: 15px;
-    margin-right: 15px;
+    background-color: #fff5;
+    box-shadow: 0 .4rem .8rem #0005;
+    border-radius: .8rem;
+    margin-left: 280px;
+    margin-bottom: 50px;
+    margin-top: 50px;
 
   }
 
-  .agregar{
-    padding: 15px;
-    font-family: 'Courier New', Courier, monospace;
-    border-radius: 4px;
-    transition: all 200ms ease;
-    border: 1px solid #000;
-  }
-
-  .agregar:hover{
-    
-    background: rgb(40, 192, 197);
-    color: #fff;
-    transform: translateY(-2%);
-  }
-
-  .containercard{
-    width: 90%;
-    display: grid;
-    grid-template-columns: repeat(4,1fr);
-
-  }
-
-  .card{
-    width: 70%;
-    margin: 80px;
-    border-radius: 6px;
-    overflow: hidden;
-    background: #fff;
-    box-shadow: 0px 1px 10px rgba(0,0,0,0.2);
-    cursor:default ;
-    transition: all 400ms ease;
-    
-    
-
-  }
-
-  .card:hover{
-    box-shadow: 5px 5px 20px rgba(0,0,0,0.4);
-    transform: translateY(-3%);
-  }
-
-  .card img{
+  table{
     width: 100%;
-    height: 210px;
   }
 
-  .card .contenido{
-    padding: 15px;
-    text-align: center;
+  table, th, td{
+    padding: 1rem;
+    
   }
 
-  .cont_princ{
-    display: inline-block;
+  .tabla_header{
+    width: 100%;
+    height: 10%;
+    background-color: #fff4;
+    padding: .8rem 1rem;
+    margin: 10px 0 30px 0px;
+    border-radius: 20px 20px 20px 20px;
+    
   }
 
-  .cont_princ2{
-    display: inline-flex;
-    margin-left: 10px;
+  .tabla_body{
+    width: 95%;
+    max-height: 89%;
+    background-color: #fffb;
+    margin: .8rem auto;
+    border-radius: 20px 20px 20px 20px;
+    
   }
 
-  .card .contenido h3{
-    font-weight: 500;
-    margin-bottom: 15px;
-  }
+  .tabla_header h1{
+    font-size: x-large;
 
-  .card .contenido .botones img{
-    width: 20px;
-    height: 20px;
   }
 
   .masinfo{
     text-decoration: none;
     display: inline-block;
-    padding: 10px;
+    padding: 15px;
     margin-top: 10px;
-    color: rgb(40, 192, 197);
-    border: 1px solid rgb(40, 192, 197);
-    border-radius: 4px;
-    transition: all 400ms ease;
+    color: white;
+    background-color: #0da4b8;
+    border: 1px solid #0da4b8;
+    border-radius: 8px;
+    
+  }
+  
+  
+  /**********/
+
+.modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+}
+
+
+
+.modal-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #fff;
+  padding: 70px;
+  line-height: 2;
+}
+
+.principal{
+    margin: 10PX auto;
+    padding: 70px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+    
+}
+
+
+
+.botones{
+	display: inline-block;
+}
+
+
+label{
+	text-decoration: solid;
+	
+}
+
+  .aceptar{
+    text-decoration: none;
+    display: inline-block;
+    padding: 15px;
+    margin-top: 10px;
+    color: white;
+    background-color: green;
+    border: 1px solid green;
+    border-radius: 8px;
+    
   }
 
-  .card .contenido a:hover{
-    background: rgb(40, 192, 197);
-    color: #fff;
+  .rechazar{
+    text-decoration: none;
+    display: inline-block;
+    padding: 15px;
+    margin-top: 10px;
+    color: white;
+    background-color: red;
+    border: 1px solid red;
+    border-radius: 8px;
   }
 
 
+ /*FOOTER*/
 
-
-  /*FOOTER*/
-
-  .footer {
+ .footer {
     width: 100%;
     position: relative;
     margin-top: 0px;
@@ -292,7 +279,6 @@ body {
     vertical-align: middle;
 
   }
-
   
   .links li {
     

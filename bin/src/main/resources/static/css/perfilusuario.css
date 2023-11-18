@@ -1,4 +1,3 @@
-/*HEADER*/
 
 * {
     padding : 0;
@@ -13,7 +12,7 @@ body {
     align-items: center;
     min-height: 100vh;
   }
-
+ 
   /*HEADER*/
 
   .logo-container{
@@ -89,6 +88,7 @@ body {
 			font-weight: bold;
 			/* Aplica negrita a la opción seleccionada */
 		}
+		
   .login {
     
     list-style: none;
@@ -118,150 +118,93 @@ body {
     text-decoration: none;
   }
   
-    .buscador{
-    position: relative;
-
-  }
-
-  .buscador input{
-    padding: 10px;
-    padding-right: 35px;
-    border-radius: 5px 5px 5px 5px;
-    border: 1px solid #000;
-    outline: none;
-    font-size: 1rem;
-	width: 300px;
-  }
-
-  button{
-    background-color:  rgb(40, 165, 155);
-    padding: 10px 15px;
-    position: absolute;
-    border: 0;
-    top: 0;
-    bottom: 0;
-    right: 0;
-    margin: auto;
-    border-radius: 0 5px 5px 0;
-    color: #fff;
-    cursor: pointer;
-  }
-
-  button:hover{
-    background-color: rgb(25, 136, 139)
-  }
+  
 
   /*MAIN*/
-  .maincard{
-    width: 90%;
+
+  .principal{
     display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    width: 50%;
+    margin-top: 50px;
+    margin-left: 450px;
+    margin-bottom: 50px;
+    min-height: 60vh;
+    background-color: #fff5;
+    box-shadow: 0 .4rem .8rem #0005;
+    border-radius: .8rem;
+    
+  }
+
+  .img{
+	max-width: 30vh;
+	max-height: 30vh;
+    padding: 5px 5px 5px 5px;
+
+  }
+
+  .imgperfil{
+    width: 50%;
+    height: 40%;
+    border-radius: 50%;
+    margin-left: 40px;
+    
+  }
+
+  .div1{
+    padding: 10px;
+
+    margin-left: 40px;
+  }
+
+  .div1 h3{
+    color:  rgb(25, 136, 139);
+    font-size: larger;
+    padding: 20px;
+    margin-bottom: 10px;
+
+  }
+
+  .datos{
+    display: flex;
+    flex-direction: row;
+    
+  }
+
+  .datos label{
+    margin-left:10px;
+  }
+
+  .actividades{
+    padding: 40px; 
+    display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-    font-family: sans-serif;
-    margin-left: 90px;
+
+   
   }
 
-  .btn_agregar{
-    display: flex;
-    align-items: center;
-    justify-content: right;
-    margin-top: 15px;
-    margin-right: 15px;
-
-  }
-
-  .agregar{
-    padding: 15px;
-    font-family: 'Courier New', Courier, monospace;
-    border-radius: 4px;
-    transition: all 200ms ease;
-    border: 1px solid #000;
-  }
-
-  .agregar:hover{
-    
-    background: rgb(40, 192, 197);
-    color: #fff;
-    transform: translateY(-2%);
-  }
-
-  .containercard{
-    width: 90%;
-    display: grid;
-    grid-template-columns: repeat(4,1fr);
-
-  }
-
-  .card{
-    width: 70%;
-    margin: 80px;
-    border-radius: 6px;
-    overflow: hidden;
-    background: #fff;
-    box-shadow: 0px 1px 10px rgba(0,0,0,0.2);
-    cursor:default ;
-    transition: all 400ms ease;
-    
-    
-
-  }
-
-  .card:hover{
-    box-shadow: 5px 5px 20px rgba(0,0,0,0.4);
-    transform: translateY(-3%);
-  }
-
-  .card img{
-    width: 100%;
-    height: 210px;
-  }
-
-  .card .contenido{
-    padding: 15px;
-    text-align: center;
-  }
-
-  .cont_princ{
-    display: inline-block;
-  }
-
-  .cont_princ2{
-    display: inline-flex;
-    margin-left: 10px;
-  }
-
-  .card .contenido h3{
-    font-weight: 500;
-    margin-bottom: 15px;
-  }
-
-  .card .contenido .botones img{
-    width: 20px;
-    height: 20px;
-  }
-
-  .masinfo{
-    text-decoration: none;
-    display: inline-block;
+  .actividades h3{
+    color:  rgb(25, 136, 139);
+    font-size: larger;
     padding: 10px;
-    margin-top: 10px;
-    color: rgb(40, 192, 197);
-    border: 1px solid rgb(40, 192, 197);
-    border-radius: 4px;
-    transition: all 400ms ease;
+    margin-bottom: 10px;
+   
   }
 
-  .card .contenido a:hover{
-    background: rgb(40, 192, 197);
-    color: #fff;
+  .actividades ul li{
+    display: flex;
+    flex-direction: column;
   }
-
-
 
 
   /*FOOTER*/
 
-  .footer {
+ .footer {
     width: 100%;
     position: relative;
     margin-top: 0px;
@@ -292,7 +235,6 @@ body {
     vertical-align: middle;
 
   }
-
   
   .links li {
     

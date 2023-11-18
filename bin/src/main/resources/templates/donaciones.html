@@ -7,23 +7,29 @@
   <script src="https://kit.fontawesome.com/26df1a260c.js" crossorigin="anonymous"></script>
 </head>
 <body>
-    <header>
-        <div class="logo-container">
-          <img src="/img/logo.png" alt="Imagen" style="width: 10%; height: 10%;">
-          <h1 style="text-align: left; font-family: Roboto, sans-serif; font-size: 24px; line-height: 1.5; padding-left: 3%;">Unidos por un Perú Mejor!</h1>
-        </div>  
-		    <nav class="nav-container">
-		      <ul class="list">		        
+	<header>
+		<div class="logo-container">
+			<img src="/img/logo.png" alt="Imagen" style="width: 10%; height: 10%;">
+			<h1
+				style="text-align: left; font-family: Roboto, sans-serif; font-size: 24px; line-height: 1.5; padding-left: 3%;">
+				Unidos por un Perú Mejor!</h1>
+		</div>
+		<nav class="nav-container">
+			<ul class="list">
 				<li><a th:href="@{/inicio}">INICIO</a></li>
-		        <li><a href="/programas">PROGRAMAS</a></li>
-		        <li><a th:href="@{/quienesSomos}">QUIÉNES SOMOS</a></li>
-		      </ul>
-		      <div class="menu_ingresar">
-		        <img src="/img/arrow_10288803.png" alt="Imagen" style="width: 30px; height: 30px;" >
-		           <a th:href="@{/logout}">Cerrar sesión</a>
-		      </div>
-	        </nav>
-    </header>
+				<li><a href="/programas">PROGRAMAS</a></li>
+				<li><a th:href="@{/quienesSomos}">QUIÉNES SOMOS</a></li>
+			</ul>
+			<div class="menu_ingresar">
+				<img src="img/arrow_10288803.png" alt="Imagen" style="width: 30px; height: 30px;">
+				<select onchange="location = this.value;">
+					<option value="" selected disabled hidden>Más Opciones</option>
+					<option th:href="@{/donacionesXUsuario}" value="/donacionesXUsuario">Mi Perfil</option>
+					<option class="cerrar" th:href="@{/logout}" value="/login?logout">Cerrar sesión</option>
+				</select>
+			</div>
+		</nav>
+	</header>
     
 	<div th:if=${param.exito}>
 		<div class="alert alert-info">Se ha registrado la donacion exitosamente</div>
@@ -45,20 +51,20 @@
        
         <div class="inputbox">
           <span>Nombre del titular de la tarjeta:</span>
-          <input type="text" name="nombreDelTitular" th:field="*{nombreDelTitular}" placeholder="Miguel Altamirano" oninput="allowOnlyLetters(event)">
+          <input type="text" name="nombreDelTitular" th:field="*{nombreDelTitular}" placeholder="Miguel Altamirano" oninput="allowOnlyLetters(event)" required>
         </div>
         <br>
 
         <div class="inputbox">
 		    <span>Número de tarjeta:</span>
 		    <input type="text" name="nroTargeta" th:field="*{nroTargeta}" placeholder="1111-2222-3333-4444" maxlength="19" 
-		     onblur="validateCardNumber(this)" oninput="formatCardNumber(this)">
+		     onblur="validateCardNumber(this)" oninput="formatCardNumber(this)" required>
 		</div>
         <br>
 
         <div class="inputbox">
           <span>Monto Donación:</span>
-          <input type="text" name="totalDona" th:field="*{totalDona}" placeholder="S/.100" oninput="allowOnlyNumbersAndDecimal(event)">
+          <input type="text" name="totalDona" th:field="*{totalDona}" placeholder="S/.100" oninput="allowOnlyNumbersAndDecimal(event)" required>
 
         </div>
         <br>
@@ -67,12 +73,12 @@
           <div class="inputbox">
             <span>Fecha de vencimiento:</span>
             <input type="text" name="caducidad" th:field="*{caducidad}" class="form-control" placeholder="MM/YYYY" 
-            	maxlength="7" oninput="formatExpirationDate(this)">
+            	maxlength="7" oninput="formatExpirationDate(this)" required>
           </div>
 
           <div class="inputbox">
             <span>CVV :</span>
-            <input type="number" name="CVC" th:field="*{CVC}" placeholder="123" maxlength="3" oninput="validateCVV(this)">
+            <input type="number" name="CVC" th:field="*{CVC}" placeholder="123" maxlength="3" oninput="validateCVV(this)" required>
           </div>
 
         </div>

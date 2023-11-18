@@ -1,12 +1,9 @@
-<!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-
 <head>
 	<meta charset="UTF-8">
 	<title>Registro de donación</title>
-	<link rel="stylesheet" href="/css/programasxjefe.css">
+	<link rel="stylesheet" href="/css/listarpostulantes.css">
 	<script src="https://kit.fontawesome.com/26df1a260c.js" crossorigin="anonymous"></script>
-</head>
+</head> 
 
 <body>
 	<header>
@@ -25,68 +22,82 @@
 				<li><a th:href="@{/postulaciones}">POSTULANTES</a></li>
 
 			</ul>
-			<div class="menu_ingresar">
-				<img src="/img/arrow_10288803.png" alt="Imagen" style="width: 30px; height: 30px;">
-				<a th:href="@{/logout}">Cerrar sesión</a>
+		    <div class="menu_ingresar">
+				<img src="img/arrow_10288803.png" alt="Imagen" style="width: 30px; height: 30px;">
+				<select onchange="location = this.value;">
+					<option value="" selected disabled hidden>Más Opciones</option>
+					<option th:href="@{/donacionesXUsuario}" value="/donacionesXUsuario" >Mi Perfil</option>
+					<option class="cerrar" th:href="@{/logout}" value="/login?logout">Cerrar sesión</option>
+				</select>
 			</div>
 		</nav>
 	</header>
 
-	<div class="btn_agregar">
-		<a th:if="${rol == 1}" th:href="@{/nuevo}" type="submit" class="agregar">Agregar Programa</a>
-	</div>
+    <main class="tabla">
+        <section class="tabla_header">
 
-	<main class="maincard">
+            <h1>Listado de Postulantes</h1>
 
-		<div class=" containercard">
-			<div class="col">
-				<div class="card">
-					<div class="contenido">
-						<div>
-							<table class="table table-striped table-bordered">
-								<thead class="table-dark">
-									<tr>
-										<th>Nombre</th>
-										<th>Apellido</th>
-										<th>Email</th>
-										<th>Acciones</th>
-									</tr>
-								</thead>
-								<tbody>
-									<tr th:each="f: ${listaForms}">
-										<td th:text="${f.usuario.nombre}">ID</td>
-										<td th:text="${f.usuario.apellido}">ID</td>
-										<td th:text="${f.usuario.email}">ID</td>
-										<td class="text-center">
-											<form
-												th:action="@{/cambiarEstadoAceptado/{idForm}(idForm=${f.idForm})}"
-												method="post">
-												<button type="submit" class="btn btn-sm btn-secundary">Aceptar<i
-														class="bi bi-trash"></i></button>
-											</form>
-											<form
-												th:action="@{/cambiarEstadoRechazado/{idForm}(idForm=${f.idForm})}"
-												method="post">
-												<button type="submit" class="btn btn-sm btn-danger">Rechazar<i
-														class="bi bi-trash"></i></button>
-											</form>
-										</td>
-										<!--<td th:text="${f.nombre}">ID</td>
-										<td th:text="${f.apellido}">ID</td>-->
+        </section>
 
-									</tr>
-								</tbody>
-							</table>
-							<!--<h3 th:text="${f.idForm}"></h3>-->
-						</div>
+        <section class="tabla_body">
+
+            <table id="tabla_listado">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Nombres</th>
+                        <th>Apellidos</th>
+                        <th>Email</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="f: ${listaForms}">
+                        <td th:text="${f.usuario.id}"></td>
+                        <td th:text="${f.usuario.nombre}"></td>
+                        <td th:text="${f.usuario.apellido}"></td>
+                        <td th:text="${f.usuario.email}"></td>
+						<td>
+							<button id="openModalButton" class="masinfo" >Más Información</button>
+						</td>	
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+    </main>
+
+				<div id="myModal" class="modal">
+						<span  class="close" id="closeModal">&times;</span>
+					<div class="modal-content" th:each="f: ${listaForms}">
+						
+						<h3>Formulario de Participación</h3>
+						<form clas"principal" >
+				
+							<label  for="cvForm"><strong>CV (PDF):</strong></label>
+							<a th:href="${f.cvForm}" target="_blank">ver archivo</a><br>
+				
+							<label for="cartaForm"><strong>Carta de Presentación (PDF):</strong></label>
+							<a th:href="${f.cartaForm}" target="_blank">ver archivo</a><br>
+				
+							<label for="antecedentesForm"><strong>Antecedentes Penales(PDF):</strong></label>
+							<a th:href="${f.antecedentesForm}" target="_blank">ver archivo</a><br>
+				
+							<label for="copiaDNI_CEForm"><strong>Copia DNI/CE (PDF):</strong></label>
+							<a th:href="${f.copiaDNI_CEForm}" target="_blank">ver archivo</a><br>
+						</form>
+						
+						<form class="botones" th:action="@{/cambiarEstadoAceptado/{idForm}(idForm=${f.idForm})}" method="post">
+							<button class="aceptar" type="submit" >Aceptar</button><br>
+						</form>
+						<form class="botones" th:action="@{/cambiarEstadoRechazado/{idForm}(idForm=${f.idForm})}" method="post">
+							<button class="rechazar" type="submit">Rechazar</button><br>
+						</form>
 					</div>
 				</div>
-			</div>
-
-		</div>
-	</main>
-
-
+				
+				
+				
 	<footer class="footer container" style="border: 1px solid #000; ">
 		<div class="footer-link">
 			<div class="links">
@@ -137,6 +148,22 @@
 		<p class="copyright" style="text-align: center; font-family: Roboto, sans-serif; font-size: 12px;">© 2023 Unidos
 			por un Perú Mejor</p>
 	</footer>
+	
+  <script>
+	  
+	   // Abrir el modal
+		document.getElementById("openModalButton").addEventListener("click", function() {
+		document.getElementById("myModal").style.display = "block";
+		});
+
+		// Cerrar el modal
+		document.getElementById("closeModal").addEventListener("click", function() {
+  		document.getElementById("myModal").style.display = "none";
+		});
+
+	  
+  </script>
 </body>
 
 </html>
+
