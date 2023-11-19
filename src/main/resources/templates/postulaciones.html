@@ -3,7 +3,7 @@
 	<title>Registro de donación</title>
 	<link rel="stylesheet" href="/css/listarpostulantes.css">
 	<script src="https://kit.fontawesome.com/26df1a260c.js" crossorigin="anonymous"></script>
-</head> 
+</head>
 
 <body>
 	<header>
@@ -22,57 +22,101 @@
 				<li><a th:href="@{/postulaciones}">POSTULANTES</a></li>
 
 			</ul>
-		    <div class="menu_ingresar">
+			<div class="menu_ingresar">
 				<img src="img/arrow_10288803.png" alt="Imagen" style="width: 30px; height: 30px;">
-				<select onchange="redireccionar(this)">
+				<select onchange="location = this.value;">
 					<option value="" selected disabled hidden>Más Opciones</option>
-					<option value="/donacionesXUsuario">Mi Perfil</option>
-					<option class="cerrar" value="/logout">Cerrar sesión</option>
+					<option th:href="@{/donacionesXUsuario}" value="/donacionesXUsuario">Mi Perfil</option>
+					<option class="cerrar" th:href="@{/logout}" value="/login?logout">Cerrar sesión</option>
 				</select>
 			</div>
 		</nav>
 	</header>
 
-    <main class="tabla">
-        <section class="tabla_header">
+	<main class="tabla">
+		<section class="tabla_header">
 
-            <h1>Listado de Postulantes</h1>
+			<h1>Listado de Postulantes</h1>
 
-        </section>
+		</section>
 
-        <section class="tabla_body">
+		<section class="tabla_body">
 
-            <table id="tabla_listado">
-                <thead>
-                    <tr>
-                        <th>Id</th>
-                        <th>Nombres</th>
-                        <th>Apellidos</th>
-                        <th>Email</th>
-                        <th>Acciones</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr th:each="f: ${listaForms}">
-                        <td th:text="${f.usuario.id}"></td>
-                        <td th:text="${f.usuario.nombre}"></td>
-                        <td th:text="${f.usuario.apellido}"></td>
-                        <td th:text="${f.usuario.email}"></td>
+			<table id="tabla_listado">
+				<thead>
+					<tr>
+						<th>Id</th>
+						<th>Nombres</th>
+						<th>Apellidos</th>
+						<th>Email</th>
+						<th>Acciones</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="f: ${listaForms}">
+						<td th:text="${f.usuario.id}"></td>
+						<td th:text="${f.usuario.nombre}"></td>
+						<td th:text="${f.usuario.apellido}"></td>
+						<td th:text="${f.usuario.email}"></td>
+						<input type="hidden" name="cvFormUrl" id="cvFormUrl" th:value="${f.cvForm}" />
+						<input type="hidden" name="cartaFormUrl" id="cartaFormUrl" th:value="${f.cartaForm}" />
+						<input type="hidden" name="antecedentesFormUrl" id="antecedentesFormUrl"
+							th:value="${f.antecedentesForm}" />
+						<input type="hidden" name="copiaDNI_CEFormUrl" id="copiaDNI_CEFormUrl"
+							th:value="${f.copiaDNI_CEForm}" />
+						<input type="hidden" name="idFormUrl" id="idFormUrl" th:value="${f.idForm}" />
 						<td>
-							<button id="openModalButton" class="masinfo" >Más Información</button>
-						</td>	
-                    </tr>
-                </tbody>
-            </table>
-        </section>
-    </main>
+							<!--<button id="openModalButton" class="masinfo" >Más Información</button>-->
+							<button id="openModalButton" class="masinfo" onclick="mostrarModal(event)">Más
+								Información</button>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</section>
+	</main>
 
-				<div id="myModal" class="modal">
+
+	<div id="myModal" class="modal">
+		<span class="close" id="closeModal">&times;</span>
+		<div class="modal-content">
+
+			<h3>Formulario de Participación</h3>
+
+			<label for="cvForm"><strong>CV (PDF):</strong></label>
+			<a href="#" id="cvForm" target="_blank">ver archivo</a><br>
+
+			<label for="cartaForm"><strong>Carta de Presentación (PDF):</strong></label>
+			<a href="#" id="cartaForm" target="_blank">ver archivo</a><br>
+
+			<label for="antecedentesForm"><strong>Antecedentes Penales(PDF):</strong></label>
+			<a href="#" id="antecedentesForm" target="_blank">ver archivo</a><br>
+
+			<label for="copiaDNI_CEForm"><strong>Copia DNI/CE (PDF):</strong></label>
+			<a href="#" id="copiaDNI_CEForm" target="_blank">ver archivo</a><br>
+
+			<!--<form class="botones" method="post">
+				<button class="aceptar" type="submit">Aceptar</button><br>
+			</form>
+			<form class="botones" method="post">
+				<button class="rechazar" type="submit">Rechazar</button><br>
+			</form>-->
+			<form id="aceptarSolicitud" class="botones" action="" method="post">
+				<button class="aceptar" type="submit">Aceptar</button><br>
+			</form>
+			<form id="rechazarSolicitud" class="botones" action="" method="post">
+				<button class="rechazar" type="submit">Rechazar</button><br>
+			</form>
+		</div>
+	</div>
+
+
+	<!--<div id="myModal" class="modal">
 						<span  class="close" id="closeModal">&times;</span>
 					<div class="modal-content" th:each="f: ${listaForms}">
 						
 						<h3>Formulario de Participación</h3>
-						<form clas"principal" >
+						
 				
 							<label  for="cvForm"><strong>CV (PDF):</strong></label>
 							<a th:href="${f.cvForm}" target="_blank">ver archivo</a><br>
@@ -85,7 +129,7 @@
 				
 							<label for="copiaDNI_CEForm"><strong>Copia DNI/CE (PDF):</strong></label>
 							<a th:href="${f.copiaDNI_CEForm}" target="_blank">ver archivo</a><br>
-						</form>
+						
 						
 						<form class="botones" th:action="@{/cambiarEstadoAceptado/{idForm}(idForm=${f.idForm})}" method="post">
 							<button class="aceptar" type="submit" >Aceptar</button><br>
@@ -94,10 +138,10 @@
 							<button class="rechazar" type="submit">Rechazar</button><br>
 						</form>
 					</div>
-				</div>
-				
-				
-				
+				</div>-->
+
+
+
 	<footer class="footer container" style="border: 1px solid #000; ">
 		<div class="footer-link">
 			<div class="links">
@@ -148,31 +192,52 @@
 		<p class="copyright" style="text-align: center; font-family: Roboto, sans-serif; font-size: 12px;">© 2023 Unidos
 			por un Perú Mejor</p>
 	</footer>
-	
-  <script>
-	  
-	   // Abrir el modal
-		document.getElementById("openModalButton").addEventListener("click", function() {
-		document.getElementById("myModal").style.display = "block";
-		});
+
+	<script>
+
+		// Abrir el modal
+		function mostrarModal(event) {
+			var boton = event.target;
+			var fila = buscarFilaPadre(boton);
+			var cvFormUrl = fila.querySelector('#cvFormUrl').value;
+			var cvForm = document.getElementById("cvForm");
+			cvForm.href = cvFormUrl;
+			var cartaFormUrl = fila.querySelector('#cartaFormUrl').value;
+			var cartaForm = document.getElementById("cartaForm");
+			cartaForm.href = cartaFormUrl;
+			var antecedentesFormUrl = fila.querySelector('#antecedentesFormUrl').value;
+			var antecedentesForm = document.getElementById("antecedentesForm");
+			antecedentesForm.href = antecedentesFormUrl;
+			var copiaDNI_CEFormUrl = fila.querySelector('#copiaDNI_CEFormUrl').value;
+			var copiaDNI_CEForm = document.getElementById("copiaDNI_CEForm");
+			copiaDNI_CEForm.href = copiaDNI_CEFormUrl;
+			var idFormUrl = fila.querySelector('#idFormUrl').value;
+			var idForm = document.getElementById("idForm");
+			idFormUrl.href = idFormUrl;
+			
+			var aceptarSolicitud = document.getElementById("aceptarSolicitud");
+            aceptarSolicitud.action = "/cambiarEstadoAceptado/"+idFormUrl;
+            var rechazarSolicitud = document.getElementById("rechazarSolicitud");
+            rechazarSolicitud.action = "/cambiarEstadoRechazado/"+idFormUrl;
+			
+			document.getElementById("myModal").style.display = "block";
+		}
+
+		//
+		function buscarFilaPadre(elemento) {
+			while (elemento && elemento.tagName !== "TR") {
+				elemento = elemento.parentNode;
+			}
+			return elemento;
+		}
 
 		// Cerrar el modal
-		document.getElementById("closeModal").addEventListener("click", function() {
-  		document.getElementById("myModal").style.display = "none";
+		document.getElementById("closeModal").addEventListener("click", function () {
+			document.getElementById("myModal").style.display = "none";
 		});
 
-	  
-  </script>
-  
-  <script>
-		function redireccionar(select) {
-			var selectedOption = select.options[select.selectedIndex];
-			if (selectedOption) {
-				location.href = selectedOption.value;
-			}
-		}
+
 	</script>
 </body>
 
 </html>
-
