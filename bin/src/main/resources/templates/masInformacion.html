@@ -1,261 +1,286 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+
 <head>
-  <meta charset="UTF-8">
-  <title>Registro de donación</title>
-  <link rel="stylesheet" href="/css/masInformacion.css">
-  <script src="https://kit.fontawesome.com/26df1a260c.js" crossorigin="anonymous"></script>
+	<meta charset="UTF-8">
+	<title>Registro de donación</title>
+	<link rel="stylesheet" href="/css/masInformacion.css">
+	<script src="https://kit.fontawesome.com/26df1a260c.js" crossorigin="anonymous"></script>
 </head>
+
 <body>
-    <header>
-        <div class="logo-container">
-          <img src="/img/logo.png" alt="Imagen" style="width: 10%; height: 10%;">
-          <h1 style="text-align: left; font-family: Roboto, sans-serif; font-size: 24px; line-height: 1.5; padding-left: 3%;">Unidos por un Perú Mejor!</h1>
-        </div>
-		    <nav class="nav-container">
-		      <ul class="list">
-		        <li><a th:href="@{/inicio}">INICIO</a></li>
-		        <li><a href="/programas">PROGRAMAS</a></li>
-		        <li><a th:href="@{/quienesSomos}">QUIÉNES SOMOS</a></li>
-		      </ul>
-		    <div class="menu_ingresar">
+	<header>
+		<div class="logo-container">
+			<img src="/img/logo.png" alt="Imagen" style="width: 10%; height: 10%;">
+			<h1
+				style="text-align: left; font-family: Roboto, sans-serif; font-size: 24px; line-height: 1.5; padding-left: 3%;">
+				Unidos por un Perú Mejor!</h1>
+		</div>
+		<nav class="nav-container">
+			<ul class="list">
+				<li><a th:href="@{/inicio}">INICIO</a></li>
+				<li><a href="/programas">PROGRAMAS</a></li>
+				<li><a th:href="@{/quienesSomos}">QUIÉNES SOMOS</a></li>
+			</ul>
+			<div class="menu_ingresar">
 				<img src="img/arrow_10288803.png" alt="Imagen" style="width: 30px; height: 30px;">
-				<select onchange="location = this.value;">
+				<select onchange="redireccionar(this)">
 					<option value="" selected disabled hidden>Más Opciones</option>
-					<option th:href="@{/donacionesXUsuario}" value="/donacionesXUsuario" >Mi Perfil</option>
-					<option class="cerrar" th:href="@{/logout}" value="/login?logout">Cerrar sesión</option>
+					<option value="/donacionesXUsuario">Mi Perfil</option>
+					<option class="cerrar" value="/logout">Cerrar sesión</option>
 				</select>
 			</div>
-        </nav>
-    </header>
-    <main th:action="@{/guardar}" th:object="${programa}" method="post" class="main-grid">
-				<div class="image-section">
-		            <img th:src="${programa.imagenPro}" alt="Imagen">
-		        </div>
-		        <div class="title-description-section">
-		            <h2 th:text="${programa.nombrePro}"></h2>
-		            <p th:text="${programa.descripcionPro}"></p>
-		        </div>
-		        <div class="activities-section">
-		            <h3>Actividades del voluntariado:</h3>
-		            <ul th:each="p: ${listActividades}">
-						<li th:text="${p}"></li>
-					</ul>
-		        </div>
-		        <div class="schedule-section">
-		            <h3>Horarios:</h3>
-		            <p th:text="${programa.descripcionPro3}"></p>
-		        </div>
-    </main>
-    
-        <div class="btn-participar">
-            <button id="openModalButton">Participa</button>
-            <a class="btn" th:href="@{'/nuevaDonacion/' + ${idPro}}" type="submit">Donaciones</a>
-        </div>
-        
-        
-		<div id="myModal" class="modal">
-		  <div class="modal-content">
-		    	<span class="close" id="closeModal">&times;</span>
-		    		<h3>Formulario de Participación</h3>
-		    		
-		    	    <form th:action="@{/guardarFormulario}" th:object="${formulario}" method="post" onsubmit="return uploadAllImages()">
-						
-						<input type="hidden" name="nombre" th:field="*{programa.idPro}" class="form-control" readonly="readonly">
-						
-				        <label for="cvForm">Cargar CV (PDF):</label>
-				        <input type="file" name="cvForm2" accept="application/pdf" onchange="updateFileList(this)" required><br>
-				        
-
-				        <label for="cartaForm">Cargar Carta (PDF):</label>
-				        <input type="file" name="cartaForm2" accept="application/pdf" onchange="updateFileList(this)" required><br>
-				       
-				
-				        <label for="antecedentesForm">Cargar Antecedentes (PDF):</label>
-				        <input type="file" name="antecedentesForm2" accept="application/pdf" onchange="updateFileList(this)" required><br>
-				        
-				
-				        <label for="copiaDNI_CEForm">Cargar Copia DNI/CE (PDF):</label>
-				        <input type="file" name="copiaDNI_CEForm2"  accept="application/pdf" onchange="updateFileList(this)" required><br>
-				        
-				        <input type="hidden" name="cvForm" id="cvFormUrl" th:value="${formulario.cvForm}" th:field="*{cvForm}" />
-						<input type="hidden" name="cartaForm" id="cartaFormUrl" th:value="${formulario.cartaForm}" th:field="*{cartaForm}" />
-						<input type="hidden" name="antecedentesForm" id="antecedentesFormUrl" th:value="${formulario.antecedentesForm}" th:field="*{antecedentesForm}" />
-						<input type="hidden" name="copiaDNI_CEForm" id="copiaDNI_CEFormUrl" th:value="${formulario.copiaDNI_CEForm}" th:field="*{copiaDNI_CEForm}" />
-				
-				        <input type="submit" value="Enviar">
-				    </form>
-				    
-		  </div>
+		</nav>
+	</header>
+	<main th:action="@{/guardar}" th:object="${programa}" method="post" class="main-grid">
+		<div class="image-section">
+			<img th:src="${programa.imagenPro}" alt="Imagen">
 		</div>
-		
-		
-  <footer class = "footer container" style="border: 1px solid #000; ">
-    <div class="footer-link"> 
-      <div class ="links">
-        <ul style="text-align: left;" >
-          <li>Unidos por un Perú mejor es una asociación legalmente constituida e inscrita como UPM(N° Registro 4563) 
-            en la Agencia Peruana de Cooperación Nacional para el Desarrollo e inscrita en el Registro de
-            Asociaciones en Perú como Asociación independiente con Número de Identificación Fiscal G4285273.
-          </li>
-          <li>
-            <img src="/img/location_535239.png" alt="Imagen" style="width: 30px; height: 30px;">
-            <p> Av. Las Nazarenas 123, Santiago de Surco, Lima, Perú</p>
-          </li>
-          <li>
-            <img src="/img/phone_1151429.png" alt="Imagen" style="width: 30px; height: 30px;">
-            <p> 01 2453689</p>
-          </li>
-          <li>
-            <img src="/img/whatsapp_2111774.png" alt="Imagen" style="width: 30px; height: 30px;">
-            <p>+51 954623887</p>
-          </li>
-        </ul>
-      </div>
-      <div class ="links">
-        <ul style="text-align: left;" >
-          <li>
-            <img src="/img/facebook_665209.png" alt="Imagen" style="width: 30px; height: 30px;">
-            <a href="#"> Unidos por un Perú Mejor</a>
-          </li>
-          <li>
-            <img src="/img/email_2989993.png" alt="Imagen" style="width: 30px; height: 30px;">
-            <a href="#"> unidosporunperumejor@gmail.com</a>
-          </li>
-          <li>
-            <img src="/img/twitter_665228.png" alt="Imagen" style="width: 30px; height: 30px;">
-            <a href="#">Unidos por un Perú Mejor</a>
-          </li> 
-          <li>
-            <img src="/img/instagram_1077042.png" alt="Imagen" style="width: 30px; height: 30px;">
-            <a href="#">@UnidosporunPerúMejor</a>
-          </li>
-        </ul>
-      </div>
-    </div>
-    <p  class="copyright" style="text-align: center; font-family: Roboto, sans-serif; font-size: 12px;">© 2023 Unidos por un Perú Mejor</p>
-    
-  </footer>
-  
-  <script>
-	  
-	   // Abrir el modal
-		document.getElementById("openModalButton").addEventListener("click", function() {
-		document.getElementById("myModal").style.display = "block";
+		<div class="title-description-section">
+			<h2 th:text="${programa.nombrePro}"></h2>
+			<p th:text="${programa.descripcionPro}"></p>
+		</div>
+		<div class="activities-section">
+			<h3>Actividades del voluntariado:</h3>
+			<ul th:each="p: ${listActividades}">
+				<li th:text="${p}"></li>
+			</ul>
+		</div>
+		<div class="schedule-section">
+			<h3>Horarios:</h3>
+			<p th:text="${programa.descripcionPro3}"></p>
+		</div>
+	</main>
+
+	<div class="btn-participar">
+		<button id="openModalButton">Participa</button>
+		<a class="btn" th:href="@{'/nuevaDonacion/' + ${idPro}}" type="submit">Donaciones</a>
+	</div>
+
+
+	<div id="myModal" class="modal">
+		<div class="modal-content">
+			<span class="close" id="closeModal">&times;</span>
+			<h3>Formulario de Participación</h3>
+
+			<form th:action="@{/guardarFormulario}" th:object="${formulario}" method="post"
+				onsubmit="return uploadAllImages()">
+
+				<input type="hidden" name="nombre" th:field="*{programa.idPro}" class="form-control"
+					readonly="readonly">
+
+				<label for="cvForm">Cargar CV (PDF):</label>
+				<input type="file" name="cvForm2" accept="application/pdf" onchange="updateFileList(this)" required><br>
+
+
+				<label for="cartaForm">Cargar Carta (PDF):</label>
+				<input type="file" name="cartaForm2" accept="application/pdf" onchange="updateFileList(this)"
+					required><br>
+
+
+				<label for="antecedentesForm">Cargar Antecedentes (PDF):</label>
+				<input type="file" name="antecedentesForm2" accept="application/pdf" onchange="updateFileList(this)"
+					required><br>
+
+
+				<label for="copiaDNI_CEForm">Cargar Copia DNI/CE (PDF):</label>
+				<input type="file" name="copiaDNI_CEForm2" accept="application/pdf" onchange="updateFileList(this)"
+					required><br>
+
+				<input type="hidden" name="cvForm" id="cvFormUrl" th:value="${formulario.cvForm}"
+					th:field="*{cvForm}" />
+				<input type="hidden" name="cartaForm" id="cartaFormUrl" th:value="${formulario.cartaForm}"
+					th:field="*{cartaForm}" />
+				<input type="hidden" name="antecedentesForm" id="antecedentesFormUrl"
+					th:value="${formulario.antecedentesForm}" th:field="*{antecedentesForm}" />
+				<input type="hidden" name="copiaDNI_CEForm" id="copiaDNI_CEFormUrl"
+					th:value="${formulario.copiaDNI_CEForm}"  th:field="*{copiaDNI_CEForm}" />
+
+				<input type="submit" value="Enviar">
+			</form>
+
+		</div>
+	</div>
+
+
+	<footer class="footer container" style="border: 1px solid #000; ">
+		<div class="footer-link">
+			<div class="links">
+				<ul style="text-align: left;">
+					<li>Unidos por un Perú mejor es una asociación legalmente constituida e inscrita como UPM(N°
+						Registro 4563)
+						en la Agencia Peruana de Cooperación Nacional para el Desarrollo e inscrita en el Registro de
+						Asociaciones en Perú como Asociación independiente con Número de Identificación Fiscal G4285273.
+					</li>
+					<li>
+						<img src="/img/location_535239.png" alt="Imagen" style="width: 30px; height: 30px;">
+						<p> Av. Las Nazarenas 123, Santiago de Surco, Lima, Perú</p>
+					</li>
+					<li>
+						<img src="/img/phone_1151429.png" alt="Imagen" style="width: 30px; height: 30px;">
+						<p> 01 2453689</p>
+					</li>
+					<li>
+						<img src="/img/whatsapp_2111774.png" alt="Imagen" style="width: 30px; height: 30px;">
+						<p>+51 954623887</p>
+					</li>
+				</ul>
+			</div>
+			<div class="links">
+				<ul style="text-align: left;">
+					<li>
+						<img src="/img/facebook_665209.png" alt="Imagen" style="width: 30px; height: 30px;">
+						<a href="#"> Unidos por un Perú Mejor</a>
+					</li>
+					<li>
+						<img src="/img/email_2989993.png" alt="Imagen" style="width: 30px; height: 30px;">
+						<a href="#"> unidosporunperumejor@gmail.com</a>
+					</li>
+					<li>
+						<img src="/img/twitter_665228.png" alt="Imagen" style="width: 30px; height: 30px;">
+						<a href="#">Unidos por un Perú Mejor</a>
+					</li>
+					<li>
+						<img src="/img/instagram_1077042.png" alt="Imagen" style="width: 30px; height: 30px;">
+						<a href="#">@UnidosporunPerúMejor</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<p class="copyright" style="text-align: center; font-family: Roboto, sans-serif; font-size: 12px;">© 2023 Unidos
+			por un Perú Mejor</p>
+
+	</footer>
+
+	<script>
+
+		// Abrir el modal
+		document.getElementById("openModalButton").addEventListener("click", function () {
+			document.getElementById("myModal").style.display = "block";
 		});
 
 		// Cerrar el modal
-		document.getElementById("closeModal").addEventListener("click", function() {
-  		document.getElementById("myModal").style.display = "none";
+		document.getElementById("closeModal").addEventListener("click", function () {
+			document.getElementById("myModal").style.display = "none";
 		});
 
-	  
-  </script>
-  <script>
-  window.watsonAssistantChatOptions = {
-    integrationID: "47b39308-3149-4472-b5c7-a71ff12e9e2e", // The ID of this integration.
-    region: "us-south", // The region your integration is hosted in.
-    serviceInstanceID: "30d3e299-5d3d-4955-b99e-d061ad0f40ca", // The ID of your service instance.
-    onLoad: async (instance) => { await instance.render(); }
-  };
-  setTimeout(function(){
-    const t=document.createElement('script');
-    t.src="https://web-chat.global.assistant.watson.appdomain.cloud/versions/" + (window.watsonAssistantChatOptions.clientVersion || 'latest') + "/WatsonAssistantChatEntry.js";
-    document.head.appendChild(t);
-  });
-</script>
 
-<script src="https://www.gstatic.com/firebasejs/10.5.2/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.5.2/firebase-database-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.5.2/firebase-storage-compat.js"></script>
+	</script>
+	<script>
+		window.watsonAssistantChatOptions = {
+			integrationID: "47b39308-3149-4472-b5c7-a71ff12e9e2e", // The ID of this integration.
+			region: "us-south", // The region your integration is hosted in.
+			serviceInstanceID: "30d3e299-5d3d-4955-b99e-d061ad0f40ca", // The ID of your service instance.
+			onLoad: async (instance) => {await instance.render();}
+		};
+		setTimeout(function () {
+			const t = document.createElement('script');
+			t.src = "https://web-chat.global.assistant.watson.appdomain.cloud/versions/" + (window.watsonAssistantChatOptions.clientVersion || 'latest') + "/WatsonAssistantChatEntry.js";
+			document.head.appendChild(t);
+		});
+	</script>
 
-    <script type="module">
-       
-        const firebaseConfig = {
-    apiKey: "AIzaSyB-GQxaW7s-s__xYEC5H7AMZsyv2aSnxhc",
-    authDomain: "prueba-proyecto-nat.firebaseapp.com",
-    projectId: "prueba-proyecto-nat",
-    storageBucket: "prueba-proyecto-nat.appspot.com",
-    messagingSenderId: "964276743413",
-    appId: "1:964276743413:web:4561a2361ba1451ed3a9bc",
-    measurementId: "G-2KGKKPQTT1"
-  };
-        // Initialize Firebase
-        //const firebase = initializeApp(firebaseConfig);
-        firebase.initializeApp(firebaseConfig);
-    </script>
+	<script src="https://www.gstatic.com/firebasejs/10.5.2/firebase-app-compat.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/10.5.2/firebase-database-compat.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/10.5.2/firebase-storage-compat.js"></script>
 
-    <script>
-        // Lista para almacenar los archivos seleccionados
-    let filesToUpload = [];
+	<script type="module">
 
-    // Función para agregar o actualizar archivos en la lista
-    function updateFileList(input) {
-        const fieldName = input.name;
-        const file = input.files[0];
+		const firebaseConfig = {
+			apiKey: "AIzaSyB-GQxaW7s-s__xYEC5H7AMZsyv2aSnxhc",
+			authDomain: "prueba-proyecto-nat.firebaseapp.com",
+			projectId: "prueba-proyecto-nat",
+			storageBucket: "prueba-proyecto-nat.appspot.com",
+			messagingSenderId: "964276743413",
+			appId: "1:964276743413:web:4561a2361ba1451ed3a9bc",
+			measurementId: "G-2KGKKPQTT1"
+		};
+		// Initialize Firebase
+		//const firebase = initializeApp(firebaseConfig);
+		firebase.initializeApp(firebaseConfig);
+	</script>
 
-        // Busca si ya hay un archivo para este campo en la lista
-        const existingFileIndex = filesToUpload.findIndex(file => file.fieldName === fieldName);
+	<script>
+		// Lista para almacenar los archivos seleccionados
+		let filesToUpload = [];
 
-        if (existingFileIndex !== -1) {
-            // Si ya existe, actualiza el archivo en la lista
-            filesToUpload[existingFileIndex] = { fieldName, file };
-        } else {
-            // Si no existe, agrega el nuevo archivo a la lista
-            filesToUpload.push({ fieldName, file });
-        }
-    }
+		// Función para agregar o actualizar archivos en la lista
+		function updateFileList(input) {
+			const fieldName = input.name;
+			const file = input.files[0];
 
-function uploadAllImages() {
-        // Evita que el formulario se envíe antes de subir los archivos
-        event.preventDefault();
+			// Busca si ya hay un archivo para este campo en la lista
+			const existingFileIndex = filesToUpload.findIndex(file => file.fieldName === fieldName);
 
-        // Verifica si hay archivos para subir
-        if (filesToUpload.length === 0) {
-            alert("Por favor, selecciona al menos un archivo.");
-            return false;
-        }
-        var cont = 0;
+			if (existingFileIndex !== -1) {
+				// Si ya existe, actualiza el archivo en la lista
+				filesToUpload[existingFileIndex] = {fieldName, file};
+			} else {
+				// Si no existe, agrega el nuevo archivo a la lista
+				filesToUpload.push({fieldName, file});
+			}
+		}
 
-        // Sube cada archivo al almacenamiento de Firebase
-        Promise.all(filesToUpload.map(({ fieldName, file }) => {
-            // Crea una referencia de almacenamiento
-            var storageRef = firebase.storage().ref(`prueba/${fieldName}_${file.name}`);
+		function uploadAllImages() {
+			// Evita que el formulario se envíe antes de subir los archivos
+			event.preventDefault();
 
-            // Sube el archivo y devuelve la promesa resultante
-            return storageRef.put(file).then(snapshot => {
-                console.log(`Archivo ${file.name} subido.`);
-                return snapshot.ref.getDownloadURL().then(url => {
-                    console.log(`URL del archivo ${file.name}: ${url}`);
-                    switch (cont) {
-                        case 0:
-                            document.getElementById("cvFormUrl").value = url;
-                            break;
-                        case 1:
-                            document.getElementById("cartaFormUrl").value = url;
-                            break;
-                        case 2:
-                            document.getElementById("antecedentesFormUrl").value = url;
-                            break;
-                        case 3:
-                            document.getElementById("copiaDNI_CEFormUrl").value = url;
-                            break;
-                    }
-                    cont++;
-                });
-            });
-        })).then(urls => {
-            // Muestra las URLs en la consola o haz lo que necesites con ellas
-            console.log('URLs de archivos:', urls);
-            // Ahora puedes enviar el formulario al controlador
-            document.forms[0].submit();
-        }).catch(error => {
-            console.error('Error en la subida de archivos:', error);
-        });
+			// Verifica si hay archivos para subir
+			if (filesToUpload.length === 0) {
+				alert("Por favor, selecciona al menos un archivo.");
+				return false;
+			}
+			var cont = 0;
 
-        return false;
-    }
-    </script>
-  
+			// Sube cada archivo al almacenamiento de Firebase
+			Promise.all(filesToUpload.map(({fieldName, file}) => {
+				// Crea una referencia de almacenamiento
+				var storageRef = firebase.storage().ref(`prueba/${fieldName}_${file.name}`);
+
+				// Sube el archivo y devuelve la promesa resultante
+				return storageRef.put(file).then(snapshot => {
+					console.log(`Archivo ${file.name} subido.`);
+					return snapshot.ref.getDownloadURL().then(url => {
+						console.log(`URL del archivo ${file.name}: ${url}`);
+						switch (cont) {
+							case 0:
+								document.getElementById("cvFormUrl").value = url;
+								break;
+							case 1:
+								document.getElementById("cartaFormUrl").value = url;
+								break;
+							case 2:
+								document.getElementById("antecedentesFormUrl").value = url;
+								break;
+							case 3:
+								document.getElementById("copiaDNI_CEFormUrl").value = url;
+								break;
+						}
+						cont++;
+					});
+				});
+			})).then(urls => {
+				// Muestra las URLs en la consola o haz lo que necesites con ellas
+				console.log('URLs de archivos:', urls);
+				// Ahora puedes enviar el formulario al controlador
+				document.forms[0].submit();
+			}).catch(error => {
+				console.error('Error en la subida de archivos:', error);
+			});
+
+			return false;
+		}
+	</script>
+
+	<script>
+		function redireccionar(select) {
+			var selectedOption = select.options[select.selectedIndex];
+			if (selectedOption) {
+				location.href = selectedOption.value;
+			}
+		}
+	</script>
+
 </body>
+
 </html>

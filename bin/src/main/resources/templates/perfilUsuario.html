@@ -24,10 +24,10 @@
 			</ul>
 		    <div class="menu_ingresar">
 				<img src="img/arrow_10288803.png" alt="Imagen" style="width: 30px; height: 30px;">
-				<select onchange="location = this.value;">
+				<select onchange="redireccionar(this)">
 					<option value="" selected disabled hidden>Más Opciones</option>
-					<option th:href="@{/donacionesXUsuario}" value="/donacionesXUsuario" >Mi Perfil</option>
-					<option class="cerrar" th:href="@{/logout}" value="/login?logout">Cerrar sesión</option>
+					<option value="/donacionesXUsuario">Mi Perfil</option>
+					<option class="cerrar" value="/logout">Cerrar sesión</option>
 				</select>
 			</div>
 		</nav>
@@ -157,6 +157,15 @@
 		un Perú Mejor</p>
 
 </footer>
+
+<script>
+		function redireccionar(select) {
+			var selectedOption = select.options[select.selectedIndex];
+			if (selectedOption) {
+				location.href = selectedOption.value;
+			}
+		}
+	</script>
 
 </body>
 
